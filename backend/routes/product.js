@@ -1,0 +1,199 @@
+var express = require('express');
+var router = express.Router();
+const userModel = require("../model/user");
+const productModel=require("../model/product");
+const catchAsyncErrors=require("../middleware/catchAsyncError");
+const { authorizeRole } = require('../middleware/authorizeRole');
+const passport=require("passport");
+
+require("../middleware/passport");
+
+
+
+router.get('/filteredProduct', passport.authenticate("jwt",{session:false}),catchAsyncErrors(async function(req, res, next) {
+ 
+  const { category, price, sortBy, page, perPage} = req.query;
+  const filter = {};
+
+
+ 
+
+  if (category) {
+    filter.category = category;
+  }
+
+ 
+  if (price) {
+    filter.price = { $lte: parseFloat(price) };
+  }
+
+  
+  const sortOptions = {};
+
+  //Add sorting options if provided
+  if (sortBy) {
+    const [field, order] = sortBy.split(':');
+    sortOptions[field] = order === 'desc' ? -1 : 1;
+   
+  }
+
+  const pageNumber = parseInt(page, 10) || 1;
+  const itemsPerPage = parseInt(perPage, 10) || 10;
+
+
+  try {
+    const totalProducts = await productModel.countDocuments(filter);
+    const totalPages = Math.ceil(totalProducts / itemsPerPage);
+
+    const paginatedProducts = await productModel.find(filter)
+      .sort(sortOptions)
+      .skip((pageNumber - 1) * itemsPerPage)
+      .limit(itemsPerPage);
+
+    res.json({
+      data: paginatedProducts,
+      meta: {
+        totalProducts,
+        totalPages,
+        currentPage: pageNumber,
+        itemsPerPage,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+  
+}));
+
+router.post('/admin/createproduct', passport.authenticate("jwt",{session:false}),
+authorizeRole("admin"),catchAsyncErrors(async function(req, res, next) {
+  const product=await productModel.create(
+    req.body
+  );
+  res.render('index', { title: 'Express' });
+}));
+
+router.delete('admin/:id', passport.authenticate("jwt",{session:false}),
+authorizeRole("admin"),catchAsyncErrors(async function(req, res, next) {
+  const product=await productModel.deleteOne({_id:req.params.id});
+  res.render('index', { title: 'Express' });
+}));
+
+router.put('admin/:id', passport.authenticate("jwt",{session:false}),
+authorizeRole("admin"),catchAsyncErrors(async function(req, res, next) {
+    const product=await productModel.updateOne({_id:req.params.id},{ $set: req.body });
+    res.render('index', { title: 'Express' });
+}));
+
+router.get('/getSingleproduct/:id', catchAsyncErrors(async function(req, res, next) {
+    
+    const product=await productModel.findOne({_id:req.params.id});
+    
+    res.json(product);
+}));
+
+router.get('/find/:productname', passport.authenticate("jwt",{session:false}),catchAsyncErrors(async function(req, res, next) {
+  const searchTerm = req.params.productname; // Replace this with the actual search term provided by the user
+
+  // Create a regex pattern using the dynamic search term
+  const regexPattern = new RegExp(`^${searchTerm}`, 'i');
+  
+  // Find users whose usernames start with the dynamic search term
+  const products= await productModel.find({ name: { $regex: regexPattern } });
+  console.log(products);
+  res.json(products);
+}));
+
+router.put("/addReview",passport.authenticate("jwt",{session:false}),async function(req,res){
+  const user=await userModel.findOne({username:req.user.username});
+  const review={
+    userId:user._id,
+    username:req.user.username,
+    comments:req.body.comments,
+    rating:Number(req.body.rating),
+  }
+  
+  const product=await productModel.findOne({_id:req.body.productId});
+ 
+  const isReviewed=product.reviews.find((review)=>
+    review.userId.toString()===req.user._id.toString()
+ );
+  
+  console.log(isReviewed);
+  if(isReviewed){
+    product.reviews.forEach(review => {
+        if(review.userId.toString()===req.user._id.toString()){
+          review.rating=req.body.rating,
+          review.comments=req.body.comments
+        }
+    });
+  }
+  else{
+    product.reviews.push(review); 
+    
+    product.numOfReviews=product.reviews.length;
+  }
+
+  let avg=0;
+  product.reviews.forEach((review)=>{
+     avg+=review.rating;
+  })
+
+  product.ratings=avg/product.reviews.length;
+  await product.save();
+  res.send(product);
+});
+
+router.get("/fetchreviews", async function(req, res, next) {
+
+  try {
+    const productId = req.query.idm; // Assuming the query parameter is named "idm"
+    const product = await productModel.findOne({ _id: productId });
+
+    if (!product) {
+      const err = new Error("Product not found");
+      err.status = 404;
+      next(err);
+    }
+
+    res.status(200).json({
+      success: true,
+      reviews: product.reviews
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(error.status || 500).json({ success: false, message: error.message });
+  }
+});
+
+router.delete("/deleteReview",passport.authenticate("jwt",{session:false}),async function(req,res){
+
+  const product = await productModel.findOne({ _id:  req.query.productId});
+
+  if (!product) {
+    const err = new Error("Product not found");
+    err.status = 404;
+    next(err);
+  }
+
+  const reviews=product.reviews.filter((rev)=>rev._id.toString()!==req.query.id);
+  let avg=0;
+  reviews.forEach((review)=>{
+     avg+=review.rating;
+  })
+  const ratings=0;
+if(avg!=0){
+ ratings=avg/reviews.length;
+}
+const numOfReviews=reviews.length;
+  await productModel.findOneAndUpdate({_id:req.query.productId},{reviews,ratings,numOfReviews});
+
+  
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews
+  });
+});
+
+module.exports = router;

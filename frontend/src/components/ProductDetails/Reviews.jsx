@@ -1,0 +1,34 @@
+import React from "react";
+import ReactStars from "react-rating-stars-component";
+import { useSelector } from "react-redux";
+
+const Reviews = () => {
+  const { product } = useSelector((state) => state.productDetails);
+  const options = {
+    edit: false,
+    color: "rgba(20,20,20,0.1)",
+    activeColor: "#FFD700",
+    size: window.innerWidth < 600 ? 20 : 25,
+    isHalf: true,
+  };
+
+  return (
+    <div className="flex flex-col mb-6 justify-center   items-center font-bold text-gray-400">
+      <h1 className="text-5xl mb-6 ">Reviews</h1>
+      <div className="w-[80%] min-h-80 p-4 flex  overflow-auto">
+        {product.reviews.map((item, index) => (
+          <div className="flex border-solid shadow-md shadow-slate-300 border-gray-800 py-6 px-2 rounded-md bg-white flex-col mx-4 w-[30%] justify-center items-center">
+            <img className="rounded-full w-20 h-20" src="/new2.jpg"></img>
+            <div className="pt-2 mt-2">{item.username}</div>
+            <ReactStars value={item.rating} {...options}></ReactStars>
+            <div className="p-4 m-4 text-gray-600  text-sm">
+              {item.comments}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Reviews;
