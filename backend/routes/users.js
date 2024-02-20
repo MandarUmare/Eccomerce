@@ -15,12 +15,12 @@ router.put(
   async function (req, res) {
     const users = await userModel.findOne({ username: req.user.username });
     console.log(users + "vjvhj");
-    users.username= req.body.username,
-    users.address= req.body.address,
-    users.city= req.body.city,
-    users.country= req.body.country,
-    users.postalCode= req.body.postalCode,
-    await users.save({ validateBeforeSave: false });
+    (users.username = req.body.username),
+      (users.address = req.body.address),
+      (users.city = req.body.city),
+      (users.country = req.body.country),
+      (users.postalCode = req.body.postalCode),
+      await users.save({ validateBeforeSave: false });
     res.send(users);
   }
 );
@@ -135,6 +135,11 @@ router.post("/login", async function (req, res) {
     sucess: true,
     message: "Logged in sucessfully",
     token: "Bearer " + token,
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    },
   });
 });
 
@@ -148,6 +153,7 @@ router.get(
       user: {
         id: req.user._id,
         username: req.user.username,
+        email: req.user.email,
       },
     });
   }

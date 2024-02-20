@@ -39,16 +39,16 @@ router.post("/newOrder", passport.authenticate("jwt",{session:false}) ,async fun
 
 router.get("/myOrders", passport.authenticate("jwt",{session:false}),async function(req,res){
     console.log(req.user._id);
-    const order=await orderModel.find({user:req.user._id});
-    console.log(order);
-    if(!order){
+    const orders=await orderModel.find({user:req.user._id});
+    console.log(orders);
+    if(!orders){
         const err=new Error("No order with this id");
         next(err);
     }
 
     res.status(200).json({
      success:true,
-     order
+     orders
     })
 })
 

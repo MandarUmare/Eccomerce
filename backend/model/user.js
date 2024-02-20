@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator=require("validator");
 
-
+// console.log(process.env.MONGO_URI);
 mongoose.connect("mongodb://localhost:27017")
   .then(() => {
     console.log("Connection Sucessful!");

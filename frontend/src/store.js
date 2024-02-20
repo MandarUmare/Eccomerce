@@ -21,6 +21,12 @@ import {
   REGISTER,
 } from "redux-persist";
 import { cartReducer } from "./reducers/cartReducer";
+import { userReducer } from "./reducers/userReducer";
+import {
+  myOrdersReducer,
+  newOrderReducer,
+  orderDetailsReducer,
+} from "./reducers/orderReducer";
 
 const persistConfig = {
   key: "root",
@@ -33,6 +39,11 @@ const reducer = combineReducers({
   productDetails: productDetailReducer,
   searchedProducts: searchproductReducer,
   cartItems: cartReducer,
+  user: userReducer,
+  newOrder: newOrderReducer,
+  myOrders: myOrdersReducer,
+  orderDetails: orderDetailsReducer,
+  
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

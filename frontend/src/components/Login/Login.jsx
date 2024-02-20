@@ -4,10 +4,13 @@ import styles from "../../../styles/styles.js";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../../actions/userActions.js";
 
 // import { toast } from "react-toastify";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const Navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
@@ -39,6 +42,8 @@ const Login = () => {
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        dispatch(saveUser(response.data.user));
         Navigate("/home");
       })
       .catch((err) => {

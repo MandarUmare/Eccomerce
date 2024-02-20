@@ -39,9 +39,11 @@ const Cart = () => {
           <div className="flex  flex-row justify-between mb-10 right-0 absolute mx-10 px-8 text-white  text-xl font-bold bg-blue-500 py-1 rounded-sm w-[35%] ">
             <span>Total</span>
             <span> ₹{total}</span>
-            <button className="bg-orange-500 font-medium px-2 my-8 py-1  rounded-[36px] w-[75%] absolute right-0 top-8">
-              Checkout
-            </button>
+            <Link to="/Shipping">
+              <button className="bg-orange-500 font-medium px-2 my-8 py-1  rounded-[36px] w-[75%] absolute right-0 top-8">
+                Checkout
+              </button>
+            </Link>
           </div>
         ) : (
           <div className="flex flex-col justify-center m-4 h-44 text-3xl font-semibold text-zinc-400 items-center">

@@ -50,8 +50,8 @@ export const getProductDetails = (id) => async (dispatch) => {
       })
       .then((response) => {
         dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: response.data });
-        // console.log("Jai Shree Ram ");
-        // console.log(response.data);
+        console.log("Jai Shree Ram ");
+        console.log(response.data);
       })
       .catch((err) => {
         dispatch({ type: PRODUCT_DETAILS_FAIL });

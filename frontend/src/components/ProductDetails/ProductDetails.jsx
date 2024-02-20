@@ -16,11 +16,14 @@ const ProductDetails = () => {
   const { id } = useParams();
   // const { product, loading } = useSelector((state)=>state.productDetails);
   const { product, loading } = useSelector((state) => state.productDetails);
-  console.log(product);
+  // console.log(product);
   console.log("dojsd");
+ 
   useEffect(() => {
+
     dispatch(getProductDetails(id));
-  }, [dispatch, id]);
+
+  },[dispatch, id]);
 
   const options = {
     edit: false,
@@ -102,6 +105,7 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+
           <Reviews></Reviews>
         </>
       )}
