@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { FaAngleRight } from "react-icons/fa6";
 import { BiMenuAltLeft } from "react-icons/bi";
@@ -11,15 +11,23 @@ import { FaStarHalf } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
+import { useDispatch } from "react-redux";
+import { getProductDetails } from "../../actions/productActions";
 
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(getProductDetails(product._id));
+  },[dispatch])
+ 
+
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "#FFD700",
-    size: window.innerWidth < 600 ? 20 : 25,
-    value: product.ratings,
-    isHalf: true,
+      edit: false,
+      color: "rgba(20,20,20,0.1)",
+      activeColor: "#FFD700",
+      size: window.innerWidth < 600 ? 20 : 25,
+      value: product.ratings,
+      isHalf: true,
   };
 
   return (

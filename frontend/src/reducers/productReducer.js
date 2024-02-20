@@ -8,6 +8,10 @@ import {
   SEARCH_PRODUCT_SUCCESS,
   SEARCH_PRODUCT_REQUEST,
   SEARCH_PRODUCT_FAIL,
+  NEW_REVIEW_REQUEST,
+  NEW_REVIEW_SUCCESS,
+  NEW_REVIEW_FAIL,
+  NEW_REVIEW_RESET,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 
@@ -16,7 +20,7 @@ export const productDetailReducer = (state = { product: [] }, action) => {
     case PRODUCT_DETAILS_REQUEST:
       return {
         loading: true,
-        product:[],
+        product: [],
       };
 
     case PRODUCT_DETAILS_SUCCESS:
@@ -28,22 +32,19 @@ export const productDetailReducer = (state = { product: [] }, action) => {
     case PRODUCT_DETAILS_FAIL:
       return {
         loading: false,
-        error:action.payload,
-       
+        error: action.payload,
       };
 
     case CLEAR_ERRORS:
-        return {
-          ...state,
-          error:null
-        };
+      return {
+        ...state,
+        error: null,
+      };
 
     default:
-    return state;
-    
+      return state;
   }
 };
-
 
 export const productReducer = (state = { product: [] }, action) => {
   switch (action.type) {
@@ -62,22 +63,20 @@ export const productReducer = (state = { product: [] }, action) => {
     case ALL_PRODUCT_FAIL:
       return {
         loading: false,
-        error:action.payload,
-        product:[]
+        error: action.payload,
+        product: [],
       };
 
     case CLEAR_ERRORS:
-        return {
-          ...state,
-          error:null
-        };
+      return {
+        ...state,
+        error: null,
+      };
 
     default:
-    return state;
-    
+      return state;
   }
 };
-
 
 export const searchproductReducer = (state = { product: [] }, action) => {
   switch (action.type) {
@@ -96,18 +95,50 @@ export const searchproductReducer = (state = { product: [] }, action) => {
     case SEARCH_PRODUCT_FAIL:
       return {
         loading: false,
-        error:action.payload,
-        product:[]
+        error: action.payload,
+        product: [],
       };
 
     case CLEAR_ERRORS:
-        return {
-          ...state,
-          error:null
-        };
+      return {
+        ...state,
+        error: null,
+      };
 
     default:
-    return state;
-    
+      return state;
+  }
+};
+
+export const newReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case NEW_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case NEW_REVIEW_SUCCESS:
+      return {
+        loading: false,
+        success: action.payload,
+      };
+    case NEW_REVIEW_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case NEW_REVIEW_RESET:
+      return {
+        ...state,
+        success: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
   }
 };

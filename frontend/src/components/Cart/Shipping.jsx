@@ -102,8 +102,9 @@ const Shipping = ({ history }) => {
               />
             </div>
 
-            <div className="my-4 py-2 ">
+            <div className="my-4 mt-0 py-2">
               <select
+                className="w-72 text-zinc-600"
                 required
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
@@ -121,6 +122,7 @@ const Shipping = ({ history }) => {
             {country && (
               <div>
                 <select
+                  className="w-72"
                   required
                   value={state}
                   onChange={(e) => setState(e.target.value)}

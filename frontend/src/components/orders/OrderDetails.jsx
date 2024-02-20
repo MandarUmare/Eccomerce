@@ -54,18 +54,18 @@ const OrderDetails = () => {
                 </div>
               </div>
               <h1 className="text-3xl font-semibold mx-8 mt-6 mb-2">Payment</h1>
-              <div className="orderDetailsContainerBox mx-12 ">
+              <div className="orderDetailsContainerBox mx-12 mt-4">
                 <div>
                   <p
                     className={
-                      order.paymentInfo &&
-                      order.paymentInfo.status === "succeeded"
-                        ? "greenColor"
-                        : "redColor"
+                      order.paymentinfo &&
+                      order.paymentinfo.status === "succeeded"
+                        ? "text-green-600 font-semibold"
+                        : "text-red-500 font-semibold"
                     }
                   >
-                    {order.paymentInfo &&
-                    order.paymentInfo.status === "succeeded"
+                    {order.paymentinfo &&
+                    order.paymentinfo.status === "succeeded"
                       ? "PAID"
                       : "NOT PAID"}
                   </p>
@@ -73,7 +73,9 @@ const OrderDetails = () => {
 
                 <div className="flex ">
                   <p>Amount:</p>
-                  <span>{order.totalPrice && order.totalPrice}</span>
+                  <span className="mx-1">
+                    ₹{order.totalPrice && order.totalPrice}
+                  </span>
                 </div>
               </div>
 
@@ -85,8 +87,8 @@ const OrderDetails = () => {
                   <p
                     className={
                       order.orderStatus && order.orderStatus === "Delivered"
-                        ? "greenColor"
-                        : "redColor"
+                        ? "text-green-500 font-semibold"
+                        : "text-red-500 font-semibold"
                     }
                   >
                     {order.orderStatus && order.orderStatus}
@@ -99,19 +101,21 @@ const OrderDetails = () => {
               <h1 className="text-3xl font-semibold mx-8 mt-6 mb-2">
                 Order Items:
               </h1>
-              <div className="orderDetailsCartItemsContainer mt-4 mx-12 ">
+              <div className="orderDetailsCartItemsContainer  mt-4 mx-12 ">
                 {order.orderItems &&
                   order.orderItems.map((item) => (
                     <div
                       key={item.product}
-                      className="flex mt-2 items-center justify-between"
+                      className="flex mt-2 shadow-slate-400 px-4 py-2 shadow-md  my-2 items-center justify-between"
                     >
                       <img
                         className="w-32 h-32"
                         src={item.image}
                         alt="Product"
                       />
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>{" "}
+                      <Link className="text-xl" to={`/product/${item.product}`}>
+                        {item.name}
+                      </Link>{" "}
                       <span>
                         {item.quantity} X ₹{item.price} ={" "}
                         <b>₹{item.price * item.quantity}</b>

@@ -9,6 +9,9 @@ import {
   SEARCH_PRODUCT_SUCCESS,
   SEARCH_PRODUCT_REQUEST,
   SEARCH_PRODUCT_FAIL,
+  NEW_REVIEW_REQUEST,
+  NEW_REVIEW_SUCCESS,
+  NEW_REVIEW_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 import { ToastContainer, toast } from "react-toastify";
@@ -25,7 +28,7 @@ export const getProducts = () => (dispatch) => {
         },
       })
       .then((response) => {
-        console.log("vc sdv" + response.data);
+        console.log(response.data.data);
         dispatch({ type: ALL_PRODUCT_SUCCESS, payload: response.data.data });
       })
       .catch((err) => {
@@ -34,7 +37,7 @@ export const getProducts = () => (dispatch) => {
         toast.error("Products not found");
       });
   } catch (error) {
-    dispatch({ type: ALL_PRODUCT_FAIL, payload: error.response.data.message });
+    dispatch({ type: ALL_PRODUCT_FAIL, payload: error });
   }
 };
 
@@ -86,6 +89,37 @@ export const searchProduct = (keyword) => (dispatch) => {
   } catch (error) {
     dispatch({
       type: SEARCH_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const newReview = (reviewData) => async (dispatch) => {
+  console.log(reviewData);
+  console.log("");
+  try {
+    dispatch({ type: NEW_REVIEW_REQUEST });
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `http://localhost:8000/product/addReview`,
+      reviewData,
+      config
+    );
+
+    dispatch({
+      type: NEW_REVIEW_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_REVIEW_FAIL,
       payload: error.response.data.message,
     });
   }
