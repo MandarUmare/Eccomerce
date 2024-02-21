@@ -18,6 +18,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./components/Cart/OrderSuccess.jsx";
 import MyOrder from "./components/orders/MyOrder.jsx";
 import OrderDetails from "./components/orders/OrderDetails.jsx";
+import Dashboard from "./components/admin/Dashboard.jsx";
+import ProductList from "./components/admin/ProductList.jsx";
+import NewProduct from "./components/admin/NewProduct.jsx";
 
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -61,6 +64,9 @@ const App = () => {
           <Route path="/success" element={<OrderSuccess></OrderSuccess>} />
           <Route path="/orders" element={<MyOrder></MyOrder>} />
           <Route path="/order/:id" element={<OrderDetails></OrderDetails>} />
+          <Route path="admin/dashboard" element={<Dashboard></Dashboard>} />
+          <Route path="/admin/products" element={<ProductList></ProductList>} />
+          <Route path="/admin/product" element={<NewProduct></NewProduct>} />
         </Routes>
         <ToastContainer
           position="bottom-center"

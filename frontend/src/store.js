@@ -5,6 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import {
+  adminProductReducer,
+  newProductReducer,
   newReviewReducer,
   productReducer,
   searchproductReducer,
@@ -45,6 +47,8 @@ const reducer = combineReducers({
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
   newReview:newReviewReducer,
+  adminProducts:adminProductReducer,
+  newProduct:newProductReducer,
   
 });
 

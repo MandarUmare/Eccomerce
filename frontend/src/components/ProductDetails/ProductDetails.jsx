@@ -30,9 +30,11 @@ const ProductDetails = () => {
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
-  const { success, error: reviewError,loading:loadingReview } = useSelector(
-    (state) => state.newReview
-  );
+  const {
+    success,
+    error: reviewError,
+    loading: loadingReview,
+  } = useSelector((state) => state.newReview);
 
   // console.log(product);
   console.log("dojsd");
@@ -94,7 +96,7 @@ const ProductDetails = () => {
       dispatch({ type: NEW_REVIEW_RESET });
     }
     dispatch(getProductDetails(id));
-  }, [success, dispatch, id,loadingReview, error, toast, reviewError]);
+  }, [success, dispatch, id, loadingReview, error, toast, reviewError]);
 
   return (
     <>
@@ -106,7 +108,10 @@ const ProductDetails = () => {
           <div className=" h-screen m-auto relative flex flex-wrap justify-center  bg-slate-100 items-center ">
             <div className="w-[30%] h-[80%]  object-fill flex bg-white p-4">
               <Carousel className="w-[100%] h-[100%]  ">
-                <img src={product.image.url}></img>
+                {product.images.map((image) => (
+                  <img src={image.url}></img>
+                 
+      ))}
               </Carousel>
             </div>
             <div className="w-[30%] h-[80%] px-8 bg-white flex flex-col p-4 ">

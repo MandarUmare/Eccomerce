@@ -16,25 +16,27 @@ import { getProductDetails } from "../../actions/productActions";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getProductDetails(product._id));
-  },[dispatch])
- 
+  }, [dispatch]);
 
   const options = {
-      edit: false,
-      color: "rgba(20,20,20,0.1)",
-      activeColor: "#FFD700",
-      size: window.innerWidth < 600 ? 20 : 25,
-      value: product.ratings,
-      isHalf: true,
+    edit: false,
+    color: "rgba(20,20,20,0.1)",
+    activeColor: "#FFD700",
+    size: window.innerWidth < 600 ? 20 : 25,
+    value: product.ratings,
+    isHalf: true,
   };
 
   return (
-    <Link to={`/product/${product._id}`}>
+    <Link to={`/product/${product?._id}`}>
       <div className=" px-2 z-0 h-80 py-4 flex shadow-lg shadow-slate-200 hover:shadow-slate-400 hover:scale-105 ease-in-out duration-300  flex-col container text-xs relative bg-white rounded-lg box-shadow-black xs-[340px]:w-50 w-full">
         <div className="flex overflow-hidden justify-center h-36">
-          <img className="object-contain pr-7" src={product.image.url}></img>
+          <img
+            className="object-contain pr-7"
+            src={product?.images[0].url}
+          ></img>
           <div className="flex flex-col absolute right-2 top-3 ">
             <span className="py-2 px-0 pl-2">
               <FaRegHeart color="grey" size={20}></FaRegHeart>
@@ -48,20 +50,20 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
         <div className="text-sky-400 text-xs absolute bottom-20">
-          Company name
+          {product?.category}
         </div>
         <div className="font-bold text-lg absolute bottom-24">
-          {product.name}
+          {product?.name}
         </div>
-        <div className="text-xs absolute bottom-14 py-2">
-          {product.description}
+        <div className="text-xs w-full h-5 overflow-hidden absolute bottom-14 ">
+          {product?.description}
         </div>
         <div className="absolute flex bottom-8 py-2">
           <ReactStars {...options}></ReactStars>
         </div>
         <div className="flex relative top-32  ">
-          <div className="font-semibold text-sm">{`₹${product.price}`}</div>
-          <div className="absolute  text-green-500 text-xs right-0">{`${product.stock} sold`}</div>
+          <div className="font-semibold text-sm">{`₹${product?.price}`}</div>
+          <div className="absolute  text-green-500 text-xs right-0">{`${product?.stock} sold`}</div>
         </div>
       </div>
     </Link>

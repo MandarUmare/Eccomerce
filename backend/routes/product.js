@@ -5,7 +5,7 @@ const productModel = require("../model/product");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 const { authorizeRole } = require("../middleware/authorizeRole");
 const passport = require("passport");
-
+const cloudinary = require("cloudinary").v2;
 require("../middleware/passport");
 
 router.get(
@@ -32,7 +32,7 @@ router.get(
     }
 
     const pageNumber = parseInt(page, 10) || 1;
-    const itemsPerPage = parseInt(perPage, 10) || 10;
+    const itemsPerPage = parseInt(perPage, 10) || 11;
 
     try {
       const totalProducts = await productModel.countDocuments(filter);
@@ -60,13 +60,56 @@ router.get(
   })
 );
 
+router.get(
+  "/adminProduct",
+  passport.authenticate("jwt", { session: false }),
+  authorizeRole("admin"),
+  catchAsyncErrors(async function (req, res, next) {
+    const product = await productModel.find();
+    res.status(200).json({
+      product,
+    });
+  })
+);
+
 router.post(
   "/admin/createproduct",
   passport.authenticate("jwt", { session: false }),
   authorizeRole("admin"),
   catchAsyncErrors(async function (req, res, next) {
+    let images = [];
+    
+
+    console.log(req.body.images);
+    if (typeof req.body.images === "string") {
+      images.push(req.body.images);
+    } else {
+      images = req.body.images;
+    }
+
+    const imagesLinks = [];
+   console.log(images.length);
+    for (let i = 0; i < images.length; i++) {
+      const result = await cloudinary.uploader.upload(images[i], {
+        folder: "products",
+      });
+
+      imagesLinks.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+
+    }
+
+    req.body.images = imagesLinks;
+    req.body.user = req.user.id;
+
     const product = await productModel.create(req.body);
-    res.render("index", { title: "Express" });
+
+    res.status(201).json({
+      success: true,
+      product,
+    });
   })
 );
 
@@ -143,8 +186,8 @@ router.put(
     console.log(review.userId);
     if (isReviewed && product.reviews) {
       product.reviews.forEach((review) => {
-        console.log("review.userId"+review.userId);
-        console.log("req.user._id"+req.user._id);
+        console.log("review.userId" + review.userId);
+        console.log("req.user._id" + req.user._id);
         if (review.userId.toString() === req.user._id.toString()) {
           (review.rating = req.body.rating),
             (review.comments = req.body.comments);

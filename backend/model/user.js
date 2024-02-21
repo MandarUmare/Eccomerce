@@ -2,7 +2,15 @@ const mongoose = require("mongoose");
 const validator=require("validator");
 
 // console.log(process.env.MONGO_URI);
-mongoose.connect("mongodb://localhost:27017")
+// mongoose.connect("mongodb://localhost:27017")
+//   .then(() => {
+//     console.log("Connection Sucessful!");
+//   })
+//   .catch(() => {
+//     console.log("Something went wrong");
+//   });
+
+mongoose.connect("mongodb+srv://mandarumare2003:Mandar123@cluster0.oavp6ko.mongodb.net/multivendoreccomerce?retryWrites=true&w=majority")
   .then(() => {
     console.log("Connection Sucessful!");
   })

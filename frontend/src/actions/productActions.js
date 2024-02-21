@@ -12,6 +12,12 @@ import {
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
+  ADMIN_PRODUCT_FAIL,
+  ADMIN_PRODUCT_REQUEST,
+  ADMIN_PRODUCT_SUCCESS,
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 import { ToastContainer, toast } from "react-toastify";
@@ -38,6 +44,30 @@ export const getProducts = () => (dispatch) => {
       });
   } catch (error) {
     dispatch({ type: ALL_PRODUCT_FAIL, payload: error });
+  }
+};
+
+export const getAdminProducts = () => (dispatch) => {
+  try {
+    dispatch({ type: ALL_PRODUCT_REQUEST });
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:8000/product/adminProduct", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch({ type: ADMIN_PRODUCT_SUCCESS, payload: response.data.product });
+      })
+      .catch((err) => {
+        dispatch({ type: ADMIN_PRODUCT_FAIL });
+
+        toast.error("Products not found");
+      });
+  } catch (error) {
+    dispatch({ type: ADMIN_PRODUCT_FAIL, payload: error });
   }
 };
 
@@ -123,4 +153,39 @@ export const newReview = (reviewData) => async (dispatch) => {
       payload: error.response.data.message,
     });
   }
+};
+
+export const createProduct = (productData) => async (dispatch) => {
+  
+  try{
+
+    dispatch({ type: NEW_PRODUCT_REQUEST });
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    };
+
+    const { data } = await axios.post(
+      `http://localhost:8000/product/admin/createproduct`,
+      productData,
+      config
+    );
+
+    dispatch({
+      type: NEW_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };

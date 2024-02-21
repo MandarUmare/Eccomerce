@@ -12,6 +12,13 @@ import {
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
   NEW_REVIEW_RESET,
+  ADMIN_PRODUCT_FAIL,
+  ADMIN_PRODUCT_REQUEST,
+  ADMIN_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
+  NEW_PRODUCT_SUCCESS,
+  NEW_PRODUCT_RESET,
+  NEW_PRODUCT_REQUEST,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 
@@ -78,6 +85,38 @@ export const productReducer = (state = { product: [] }, action) => {
   }
 };
 
+export const adminProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_PRODUCT_REQUEST:
+      return {
+        loading: true,
+        product: [],
+      };
+
+    case ADMIN_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        product: action.payload,
+      };
+
+    case ADMIN_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+        product: [],
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const searchproductReducer = (state = { product: [] }, action) => {
   switch (action.type) {
     case SEARCH_PRODUCT_REQUEST:
@@ -105,6 +144,47 @@ export const searchproductReducer = (state = { product: [] }, action) => {
         error: null,
       };
 
+    default:
+      return state;
+  }
+};
+
+export const newProductReducer = (state = {product:[]}, action) => {
+  switch (action.type) {
+    case NEW_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case NEW_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        success: action.payload.success,
+        product:action.payload.product,
+      };
+    case NEW_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case NEW_PRODUCT_RESET:
+      return {
+        ...state,
+        success: false,
+      };
+
+    case NEW_PRODUCT_RESET:
+        return {
+          ...state,
+          success: false,
+        };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }
@@ -142,3 +222,6 @@ export const newReviewReducer = (state = {}, action) => {
       return state;
   }
 };
+
+
+
