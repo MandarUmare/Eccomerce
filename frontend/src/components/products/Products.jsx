@@ -13,8 +13,8 @@ const Products = () => {
     <>
       <Header></Header>
       <div className="mt-10 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5  gap-y-8 gap-x-6  px-9 justify-between min-h-[50vh]">
-        {product.map((item, index) => (
-          <ProductCard key={product._id} product={item}
+        {product.map((product, index) => (
+          <ProductCard key={product._id} product={product}
            isWishlisted={wishlist.find(
                   (item) => item._id === product._id
                 )}
