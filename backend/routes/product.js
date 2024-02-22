@@ -114,12 +114,15 @@ router.post(
 );
 
 router.delete(
-  "admin/:id",
-  passport.authenticate("jwt", { session: false }),
+  "/admin/:id",
+  passport.authenticate("jwt", { session: false}),
   authorizeRole("admin"),
   catchAsyncErrors(async function (req, res, next) {
     const product = await productModel.deleteOne({ _id: req.params.id });
-    res.render("index", { title: "Express" });
+    res.status(201).json({
+      success: true,
+     
+    });
   })
 );
 

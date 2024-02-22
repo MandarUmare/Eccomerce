@@ -8,8 +8,9 @@ import { toast, ToastContainer } from "react-toastify";
 
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cartItems);
+  
   const dispatch = useDispatch();
-
+  
   let total = 0;
   cartItems.map((item, index) => {
     console.log(typeof item.price);

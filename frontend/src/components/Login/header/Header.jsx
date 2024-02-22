@@ -17,6 +17,7 @@ const Header = () => {
   const [dropDown, setDropDown] = useState(false);
   const [searchterm, setSearchterm] = useState("");
   const { product, error } = useSelector((state) => state.products);
+  const { wishlist } = useSelector((state) => state.wishlistedProducts);
   const { cartItems } = useSelector((state) => state.cartItems);
   const category = [];
   const inputref = useRef(null);
@@ -113,12 +114,16 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex justify-between w-32 mr-16 items-center">
-          <div className="relative">
-            <FaRegHeart color="white" size={25}></FaRegHeart>
-            <span className="absolute bg-green-600 rounded-full font-mono text-[10px] px-1 text-slate-100 top-[-2px] right-[-4px]">
-              1
-            </span>
-          </div>
+          <Link to={"/wishlist"}>
+            <div className="relative">
+              <FaRegHeart color="white" size={25}></FaRegHeart>
+              {wishlist.length > 0 ? (
+                <span className="absolute bg-green-600 rounded-full font-mono text-[10px] px-1 text-slate-100 top-[-2px] right-[-4px]">
+                  {wishlist.length}
+                </span>
+              ) : null}
+            </div>
+          </Link>
           <Link to={"/cart"}>
             <div className="relative cursor-pointer">
               <PiShoppingCartBold color="white" size={25}></PiShoppingCartBold>

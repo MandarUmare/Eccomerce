@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import Loding from "../LOading/Loding";
 
 const Categories = () => {
-
   const { product, loading } = useSelector((state) => state.products);
   const category = [];
   product.forEach((item) => {
@@ -74,7 +73,7 @@ const Categories = () => {
                 <span className="h-32 w-36  overflow-hidden">
                   <img
                     className="rounded-lg"
-                    src="../../../public/new2.jpg"
+                    src={product[0].images[0].url}
                   ></img>
                 </span>
               </div>

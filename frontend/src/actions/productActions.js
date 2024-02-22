@@ -18,6 +18,10 @@ import {
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
+  DELETE_PRODUCT_FAIL,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_RESET,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 import { ToastContainer, toast } from "react-toastify";
@@ -59,7 +63,10 @@ export const getAdminProducts = () => (dispatch) => {
       })
       .then((response) => {
         console.log(response);
-        dispatch({ type: ADMIN_PRODUCT_SUCCESS, payload: response.data.product });
+        dispatch({
+          type: ADMIN_PRODUCT_SUCCESS,
+          payload: response.data.product,
+        });
       })
       .catch((err) => {
         dispatch({ type: ADMIN_PRODUCT_FAIL });
@@ -88,6 +95,36 @@ export const getProductDetails = (id) => async (dispatch) => {
       })
       .catch((err) => {
         dispatch({ type: PRODUCT_DETAILS_FAIL });
+
+        toast.error("Product not found");
+      });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+    });
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_PRODUCT_REQUEST });
+    const token = localStorage.getItem("token");
+    await axios
+      .delete(`http://localhost:8000/product/admin/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        dispatch({
+          type: DELETE_PRODUCT_SUCCESS,
+          payload: response.data.success,
+        });
+        console.log("Jai Shree Ram ");
+        console.log(response.data);
+      })
+      .catch((err) => {
+        dispatch({ type: DELETE_PRODUCT_FAIL });
 
         toast.error("Product not found");
       });
@@ -156,9 +193,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 };
 
 export const createProduct = (productData) => async (dispatch) => {
-  
-  try{
-
+  try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
     const config = {

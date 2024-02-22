@@ -1,48 +1,59 @@
 import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getAdminProducts } from "../../actions/productActions.js";
-import { Link } from "react-router-dom";
+import {
+  clearErrors,
+  getAdminProducts,
+  deleteProduct,
+} from "../../actions/productActions.js";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import MetaData from "../Metadata";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import {
+  DELETE_PRODUCT_RESET,
+  DELETE_PRODUCT_FAIL,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+} from "../../constants/productConstants.js";
 
 // import EditIcon from "@material-ui/icons/Edit";
 // import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
+import { toast } from "react-toastify";
 
-const ProductList = ({ history }) => {
+const ProductList = () => {
   const dispatch = useDispatch();
-
+  const Navigate = useNavigate();
   const { error, product } = useSelector((state) => state.adminProducts);
 
-  //   const { error: deleteError, isDeleted } = useSelector(
-  //     (state) => state.product
-  //   );
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.deletedProduct
+  );
 
-  //   const deleteProductHandler = (id) => {
-  //     dispatch(deleteProduct(id));
-  //   };
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
-    // if (deleteError) {
-    //   alert.error(deleteError);
-    //   dispatch(clearErrors());
-    // }
+    if (deleteError) {
+      toast.error(deleteError);
+      dispatch(clearErrors());
+    }
 
-    // if (isDeleted) {
-    //   alert.success("Product Deleted Successfully");
-    //   history.push("/admin/dashboard");
-    //   dispatch({ type: DELETE_PRODUCT_RESET });
-    // }
+    if (isDeleted) {
+      toast.success("Product Deleted Successfully");
+      Navigate("/admin/dashboard");
+      dispatch({ type: DELETE_PRODUCT_RESET });
+    }
 
     dispatch(getAdminProducts());
-  }, [dispatch, alert, error, history]);
+  }, [dispatch, alert, error, history,isDeleted]);
 
   const columns = [
     {

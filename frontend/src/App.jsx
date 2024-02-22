@@ -21,6 +21,7 @@ import OrderDetails from "./components/orders/OrderDetails.jsx";
 import Dashboard from "./components/admin/Dashboard.jsx";
 import ProductList from "./components/admin/ProductList.jsx";
 import NewProduct from "./components/admin/NewProduct.jsx";
+import Wishlist from "./components/wishlist/Wishlist.jsx";
 
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order/confirm" element={<ConfirmOrder />} />
+          <Route path="/wishlist" element={<Wishlist></Wishlist>} />
           <Route
             path="/process/payment"
             element={

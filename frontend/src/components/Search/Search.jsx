@@ -6,10 +6,10 @@ import Header from "../Login/header/Header";
 import ProductCard from "../ProductCard/ProductCard";
 import { Pagination } from "@mui/material";
 
-
 const Search = () => {
   const { keyword } = useParams();
   const dispatch = useDispatch();
+  const { wishlist } = useSelector((state) => state.wishlistedProducts);
   const { product } = useSelector((state) => state.searchedProducts);
 
   return (
@@ -17,7 +17,11 @@ const Search = () => {
       <Header></Header>
       <div className="mt-10 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5  gap-y-8 gap-x-6  px-9 justify-between min-h-[50vh]">
         {product.map((item, index) => (
-          <ProductCard key={item._id} product={item}></ProductCard>
+          <ProductCard
+            key={item._id}
+            product={item}
+            isWishlisted={wishlist.find((item) => item._id === product._id)}
+          ></ProductCard>
         ))}
       </div>
       <div className="flex m-8 justify-center items-center">

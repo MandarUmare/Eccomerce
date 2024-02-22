@@ -6,6 +6,7 @@ import {
 import { composeWithDevTools } from "@redux-devtools/extension";
 import {
   adminProductReducer,
+  deleteProductReducer,
   newProductReducer,
   newReviewReducer,
   productReducer,
@@ -30,6 +31,8 @@ import {
   newOrderReducer,
   orderDetailsReducer,
 } from "./reducers/orderReducer";
+import { addtowishlist } from "./actions/wishAction";
+import { wishlistReducer } from "./reducers/wishlistReducer";
 
 const persistConfig = {
   key: "root",
@@ -46,10 +49,11 @@ const reducer = combineReducers({
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
-  newReview:newReviewReducer,
-  adminProducts:adminProductReducer,
-  newProduct:newProductReducer,
-  
+  newReview: newReviewReducer,
+  adminProducts: adminProductReducer,
+  newProduct: newProductReducer,
+  deletedProduct: deleteProductReducer,
+  wishlistedProducts: wishlistReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
