@@ -14,6 +14,7 @@ const Login = () => {
   const Navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -29,12 +30,15 @@ const Login = () => {
         },
       })
       .then((response) => {
+        // dispatch(saveUser(response.data));
+       
         Navigate("/home");
+        toast.success("Logged IN Successfully");
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   const submit = (data) => {
     axios

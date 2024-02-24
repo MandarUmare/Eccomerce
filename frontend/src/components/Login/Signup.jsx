@@ -7,11 +7,14 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { IoMdMail } from "react-icons/io";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../../actions/userActions.js";
 
 const Singup = () => {
   const Navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
+  const dispatch=useDispatch();
   const {
     register,
     handleSubmit,
@@ -35,6 +38,7 @@ const Singup = () => {
               axios.post("http://localhost:8000/users/register",data).then((response)=>{
                 console.log(response.data);
                 localStorage.setItem("token",response.data.token);
+                dispatch(saveUser(response.data.user));
                 Navigate("/home");
               
               }).catch((err)=>{

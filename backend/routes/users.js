@@ -118,6 +118,13 @@ router.post("/register", async function (req, res, next) {
     sucess: true,
     message: "Logged in sucessfully",
     token: "Bearer " + token,
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      avtar: user.avatar,
+      role: user.role,
+    },
   });
 });
 

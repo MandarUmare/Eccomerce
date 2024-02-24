@@ -226,7 +226,7 @@ const Header = () => {
                 direction="down"
                 className="speedDial w-2 h-2"
                 icon={
-                  user.avtar.url ? (
+                  user?.avtar?.url ? (
                     <img
                       className="speedDialIcon rounded-full w-8 h-8 "
                       src={user.avtar.url ? user.avtar.url : "/Profile.png"}
