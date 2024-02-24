@@ -39,7 +39,7 @@ const ProductCard = ({ product, isWishlisted }) => {
   };
 
   const addToCart = (e) => {
-    dispatch(addtocart(product._id));
+    dispatch(addtocart(product._id,1));
   };
 
   const addToWishlist = (e) => {

@@ -31,6 +31,7 @@ const Singup = () => {
   },[]);
 
   const submit=(data)=>{
+    data.avtar=avatar;
               axios.post("http://localhost:8000/users/register",data).then((response)=>{
                 console.log(response.data);
                 localStorage.setItem("token",response.data.token);
@@ -41,6 +42,20 @@ const Singup = () => {
               })
   }
   
+  const createAvtarImageChange=(e)=>{
+  const file=e.target.files;
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    if(reader.readyState==2){
+      setAvatar(reader.result);
+    }
+  }
+
+  reader.readAsDataURL(file[0]);
+  
+
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -147,6 +162,7 @@ const Singup = () => {
                 >
                   <span>Upload a file</span>
                   <input
+                    onChange={createAvtarImageChange}
                     type="file"
                     name="avatar"
                     id="file-input"

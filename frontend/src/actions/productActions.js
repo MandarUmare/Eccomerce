@@ -27,17 +27,18 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const getProducts = () => (dispatch) => {
+export const getProducts = (name) => (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8000/product/filteredProduct", {
+      .get(`http://localhost:8000/product/filteredProduct`, {
         headers: {
           Authorization: token,
         },
       })
       .then((response) => {
+        console.log("phone");
         console.log(response.data.data);
         dispatch({ type: ALL_PRODUCT_SUCCESS, payload: response.data.data });
       })
@@ -77,6 +78,8 @@ export const getAdminProducts = () => (dispatch) => {
     dispatch({ type: ADMIN_PRODUCT_FAIL, payload: error });
   }
 };
+
+
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {

@@ -22,7 +22,7 @@ const Cart = () => {
 
   return (
     <>
-      <Header></Header>
+      
 
       <div className="mb-32 p-6 py-12">
         {cartItems.length > 0 ? (

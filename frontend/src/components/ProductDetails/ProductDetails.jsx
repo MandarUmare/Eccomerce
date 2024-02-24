@@ -100,7 +100,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Header></Header>
+    
       {loading ? (
         <Loding></Loding>
       ) : (

@@ -22,10 +22,15 @@ import Dashboard from "./components/admin/Dashboard.jsx";
 import ProductList from "./components/admin/ProductList.jsx";
 import NewProduct from "./components/admin/NewProduct.jsx";
 import Wishlist from "./components/wishlist/Wishlist.jsx";
+import CategoryProducts from "./components/Categories.jsx/CategoryProducts.jsx";
+import Profile from "./components/Profile/Profile.jsx";
+import ProtectedRoute from "./components/Protected/ProtectedRoute.jsx";
+import Header from "./components/Login/header/Header.jsx";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
-
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
     const fetchStripeApiKey = async () => {
       try {
@@ -44,31 +49,156 @@ const App = () => {
   return (
     <>
       <Router>
+        {isAuthenticated ? <Header></Header> : null}
         <Routes>
           <Route path="/" element={<Loginpage />} />
           <Route path="/sign-up" element={<Signuppage />} />
-          <Route path="/home" element={<Homepage />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/search/:keyword" element={<Search />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/shipping" element={<Shipping />} />
-          <Route path="/order/confirm" element={<ConfirmOrder />} />
-          <Route path="/wishlist" element={<Wishlist></Wishlist>} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Homepage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoute>
+                <ProductDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <Products />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/search/:keyword"
+            element={
+              <ProtectedRoute>
+                <Search />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/shipping"
+            element={
+              <ProtectedRoute>
+                <Shipping />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order/confirm"
+            element={
+              <ProtectedRoute>
+                <ConfirmOrder />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <Wishlist></Wishlist>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/category/:name"
+            element={
+              <ProtectedRoute>
+                <CategoryProducts></CategoryProducts>
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/process/payment"
             element={
-              <Elements stripe={loadStripe(stripeApiKey)}>
-                <Payment />
-              </Elements>
+              <ProtectedRoute>
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <Payment />
+                </Elements>
+              </ProtectedRoute>
             }
           />
-          <Route path="/success" element={<OrderSuccess></OrderSuccess>} />
-          <Route path="/orders" element={<MyOrder></MyOrder>} />
-          <Route path="/order/:id" element={<OrderDetails></OrderDetails>} />
-          <Route path="admin/dashboard" element={<Dashboard></Dashboard>} />
-          <Route path="/admin/products" element={<ProductList></ProductList>} />
-          <Route path="/admin/product" element={<NewProduct></NewProduct>} />
+          <Route
+            path="/success"
+            element={
+              <ProtectedRoute>
+                <OrderSuccess></OrderSuccess>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <MyOrder></MyOrder>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order/:id"
+            element={
+              <ProtectedRoute>
+                <OrderDetails></OrderDetails>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard></Dashboard>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <ProtectedRoute>
+                <ProductList></ProductList>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/product"
+            element={
+              <ProtectedRoute>
+                <NewProduct></NewProduct>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/logout"
+            element={
+              <ProtectedRoute>
+                <NewProduct></NewProduct>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Profile></Profile>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <ToastContainer
           position="bottom-center"

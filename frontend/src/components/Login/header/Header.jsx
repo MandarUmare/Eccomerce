@@ -6,19 +6,37 @@ import { FaAngleDown } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa6";
 import { PiShoppingCartBold } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
+import { MdOutlineExitToApp } from "react-icons/md";
 import Dropdown from "./Dropdown/Dropdown";
-
+import { FaListAlt } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { searchProduct } from "../../../actions/productActions";
+import { toast } from "react-toastify";
+// import * as React from 'react';
+import Box from "@mui/material/Box";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialIcon from "@mui/material/SpeedDialIcon";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
+import SaveIcon from "@mui/icons-material/Save";
+import PrintIcon from "@mui/icons-material/Print";
+import ShareIcon from "@mui/icons-material/Share";
+import { FaShoppingCart } from "react-icons/fa";
+import { IoPersonSharp } from "react-icons/io5";
+import { logout } from "../../../actions/userActions";
+
 const Header = () => {
   const [dropDown, setDropDown] = useState(false);
   const [searchterm, setSearchterm] = useState("");
   const { product, error } = useSelector((state) => state.products);
   const { wishlist } = useSelector((state) => state.wishlistedProducts);
   const { cartItems } = useSelector((state) => state.cartItems);
+  const { order } = useSelector((state) => state.newOrder);
+  const { user } = useSelector((state) => state.user);
   const category = [];
   const inputref = useRef(null);
   const navigate = useNavigate();
@@ -40,6 +58,61 @@ const Header = () => {
     category.forEach((item) => {
       console.log(item);
     });
+  }
+
+  const options = [
+    {
+      icon: (
+        <FaListAlt
+          style={{ color: order.length > 0 ? "tomato" : "unset" }}
+        ></FaListAlt>
+      ),
+      name: "Orders",
+      func: orders,
+    },
+    { icon: <IoPersonSharp></IoPersonSharp>, name: "Profile", func: account },
+    {
+      icon: (
+        <FaShoppingCart
+          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+        />
+      ),
+      name: `Cart(${cartItems.length})`,
+      func: cart,
+    },
+    {
+      icon: <MdOutlineExitToApp></MdOutlineExitToApp>,
+      name: "Logout",
+      func: logoutUser,
+    },
+  ];
+
+  if (user.role === "admin") {
+    options.unshift({
+      icon: <MdDashboard className="mr-2"></MdDashboard>,
+      name: "Dashboard",
+      func: dashboard,
+    });
+  }
+
+  function dashboard() {
+    navigate("/admin/dashboard");
+  }
+
+  function orders() {
+    navigate("/orders");
+  }
+  function account() {
+    navigate("/account");
+  }
+  function cart() {
+    navigate("/cart");
+  }
+  function logoutUser() {
+    dispatch(logout());
+    
+    navigate("/");
+    toast("Logout Successfully");
   }
 
   return (
@@ -134,11 +207,39 @@ const Header = () => {
               ) : null}
             </div>
           </Link>
-          <div className="relative">
-            <CgProfile color="white" size={25}></CgProfile>
-            <span className="absolute bg-green-600 rounded-full font-mono text-[10px] px-1 text-slate-100 top-[-2px] right-[-4px]">
-              1
-            </span>
+          <div className="relative flex items-center bottom-3   object-cover">
+            {user ? (
+              <Box
+                width={2}
+                sx={{ "& .MuiFab-primary": { width: 35, height: 0 } }}
+              >
+                <SpeedDial
+                  ariaLabel="SpeedDial tooltip example"
+                  style={{ zIndex: "11" }}
+                  direction="down"
+                  className="speedDial w-2 h-2"
+                  icon={
+                    <img
+                      className="speedDialIcon rounded-full w-8 h-8 "
+                      src={user.avtar.url ? user.avtar.url : "/Profile.png"}
+                      alt="Profile"
+                    />
+                  }
+                >
+                  {options.map((item) => (
+                    <SpeedDialAction
+                      key={item.name}
+                      icon={item.icon}
+                      tooltipTitle={item.name}
+                      onClick={item.func}
+                      tooltipOpen={window.innerWidth <= 600 ? true : false}
+                    />
+                  ))}
+                </SpeedDial>
+              </Box>
+            ) : (
+              <CgProfile></CgProfile>
+            )}
           </div>
         </div>
       </div>

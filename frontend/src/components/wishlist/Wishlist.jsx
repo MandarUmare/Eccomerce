@@ -18,7 +18,7 @@ const Wishlist = () => {
 
   return (
     <>
-      <Header></Header>
+      
       <h1 className=" p-8 px-10 text-5xl font-bold">Wishlist</h1>
       <div className="mb-20 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5  gap-y-8 gap-x-6  px-9 justify-between min-h-[50vh] ">
         {wishlist.map((product, index) => (
