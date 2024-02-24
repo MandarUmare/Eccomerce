@@ -25,12 +25,15 @@ import {
   REGISTER,
 } from "redux-persist";
 import { cartReducer } from "./reducers/cartReducer";
-import { userReducer } from "./reducers/userReducer";
+import { userReducer ,profileReducer} from "./reducers/userReducer";
 import {
   myOrdersReducer,
   newOrderReducer,
   orderDetailsReducer,
+  allOrdersReducer,
+  orderReducer,
 } from "./reducers/orderReducer";
+import { allUsersReducer,userDetailsReducer } from "./reducers/userReducer";
 import { addtowishlist } from "./actions/wishAction";
 import { wishlistReducer } from "./reducers/wishlistReducer";
 
@@ -54,6 +57,11 @@ const reducer = combineReducers({
   newProduct: newProductReducer,
   deletedProduct: deleteProductReducer,
   wishlistedProducts: wishlistReducer,
+  allOrders: allOrdersReducer,
+  order:orderReducer,
+  allUsers: allUsersReducer,
+  userDetails: userDetailsReducer,
+  profile: profileReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

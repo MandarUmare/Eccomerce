@@ -78,7 +78,6 @@ router.post(
   authorizeRole("admin"),
   catchAsyncErrors(async function (req, res, next) {
     let images = [];
-    
 
     console.log(req.body.images);
     if (typeof req.body.images === "string") {
@@ -88,7 +87,7 @@ router.post(
     }
 
     const imagesLinks = [];
-   console.log(images.length);
+    console.log(images.length);
     for (let i = 0; i < images.length; i++) {
       const result = await cloudinary.uploader.upload(images[i], {
         folder: "products",
@@ -98,7 +97,6 @@ router.post(
         public_id: result.public_id,
         url: result.secure_url,
       });
-
     }
 
     req.body.images = imagesLinks;
@@ -115,27 +113,65 @@ router.post(
 
 router.delete(
   "/admin/:id",
-  passport.authenticate("jwt", { session: false}),
+  passport.authenticate("jwt", { session: false }),
   authorizeRole("admin"),
   catchAsyncErrors(async function (req, res, next) {
     const product = await productModel.deleteOne({ _id: req.params.id });
     res.status(201).json({
       success: true,
-     
     });
   })
 );
 
 router.put(
-  "admin/:id",
+  "/admin/:id",
   passport.authenticate("jwt", { session: false }),
   authorizeRole("admin"),
   catchAsyncErrors(async function (req, res, next) {
-    const product = await productModel.updateOne(
+    let product = await productModel.findById(req.params.id);
+    if (!product) {
+      return next(new ErrorHander("Product not found", 404));
+    }
+
+    // Images Start Here
+    let images = [];
+
+    if (typeof req.body.images === "string") {
+      images.push(req.body.images);
+    } else {
+      images = req.body.images;
+    }
+
+    if (images !== undefined) {
+      for (let i = 0; i < product.images.length; i++) {
+        await cloudinary.uploader.destroy(product.images[i].public_id);
+      }
+
+      const imagesLinks = [];
+
+      for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.uploader.upload(images[i], {
+          folder: "products",
+        });
+
+        imagesLinks.push({
+          public_id: result.public_id,
+          url: result.secure_url,
+        });
+      }
+
+      req.body.images = imagesLinks;
+    }
+
+    console.log(req.body);
+    product = await productModel.updateOne(
       { _id: req.params.id },
       { $set: req.body }
     );
-    res.render("index", { title: "Express" });
+    res.status(200).json({
+      success: true,
+      product,
+    });
   })
 );
 

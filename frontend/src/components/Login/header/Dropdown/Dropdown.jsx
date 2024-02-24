@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Dropdown = ({ categoriesData }) => {
+const Dropdown = () => {
+  const categoriesData = [
+    "Attire",
+    "Footwear",
+    "SmartPhones",
+    "SmartWatches",
+    "Shoes",
+    "Tops",
+  ];
   return (
     <div className=" bg-white shadow-xl shadow-slate-600 relative z-10">
       <ul>

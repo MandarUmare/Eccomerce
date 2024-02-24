@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 
-// import { getAllOrders } from "../../actions/orderAction.js";
-// import { getAllUsers } from "../../actions/userAction.js";
+import { getAllOrders } from "../../actions/orderAction.js";
+import { getAllUsers } from "../../actions/userActions.js";
 import { LineChart } from "@mui/x-charts/LineChart";
 import MetaData from "../Metadata";
 import { PieChart } from "@mui/x-charts/PieChart";
@@ -17,31 +17,31 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const { product } = useSelector((state) => state.adminProducts);
+  const { orders } = useSelector((state) => state.allOrders);
 
-  //   const { orders } = useSelector((state) => state.allOrders);
-
-  //   const { users } = useSelector((state) => state.allUsers);
+  const { users } = useSelector((state) => state.allUsers);
 
   let outOfStock = 0;
 
-  //   products &&
-  //     products.forEach((item) => {
-  //       if (item.Stock === 0) {
-  //         outOfStock += 1;
-  //       }
-  //     });
+  product &&
+    product.forEach((item) => {
+      if (item.stock === 0) {
+        outOfStock += 1;
+      }
+    });
 
   useEffect(() => {
     dispatch(getAdminProducts());
-    // dispatch(getAllOrders());
-    // dispatch(getAllUsers());
+    dispatch(getAllOrders());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   let totalAmount = 0;
-  //   orders &&
-  //     orders.forEach((item) => {
-  //       totalAmount += item.totalPrice;
-  //     });
+  
+  orders &&
+    orders.forEach((item) => {
+      totalAmount += item.totalPrice;
+    });
 
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
@@ -88,18 +88,18 @@ const Dashboard = () => {
               <p className="">{product && product.length}</p>
             </Link>
             <Link
-              className="w-32 h-32  bg-orange-300 rounded-full text-center items-center flex justify-center mx-8 text-white text-2xl"
+              className="w-32 h-32  bg-orange-300 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
               to="/admin/orders"
             >
               <p>Orders</p>
-              {/* <p>{orders && orders.length}</p> */}
+              <p>{orders && orders.length}</p>
             </Link>
             <Link
-              className="w-32 h-32 bg-zinc-500 rounded-full text-center items-center flex justify-center mx-8 text-white text-2xl"
+              className="w-32 h-32 bg-zinc-500 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
               to="/admin/users"
             >
               <p>Users</p>
-              {/* <p>{users && users.length}</p> */}
+              <p>{users && users.length}</p>
             </Link>
           </div>
         </div>
@@ -123,9 +123,12 @@ const Dashboard = () => {
             series={[
               {
                 data: [
-                  { id: 0, value: 10, label: "series A" },
-                  { id: 1, value: 15, label: "series B" },
-                  { id: 2, value: 20, label: "series C" },
+                  {
+                    id: 0,
+                    value: product.length - outOfStock,
+                    label: "In Stock",
+                  },
+                  { id: 1, value: outOfStock, label: "Out of Stock" },
                 ],
                 highlightScope: { faded: "global", highlighted: "item" },
                 faded: {

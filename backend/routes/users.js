@@ -5,6 +5,7 @@ const userModel = require("../model/user");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { authorizeRole } = require("../middleware/authorizeRole");
+const cloudinary = require("cloudinary").v2;
 require("../middleware/passport");
 
 // user route
@@ -70,7 +71,9 @@ router.put(
       { role: req.body.role }
     );
     console.log(user.role);
-    res.send("role updated");
+    res.status(200).json({
+      success: true,
+    });
   }
 );
 
@@ -81,14 +84,25 @@ router.delete(
   async function (req, res) {
     const user = await userModel.findOneAndDelete({ _id: req.params.id });
 
-    res.send("deleted");
+    res.status(200).send({
+      sucess: true,
+    });
   }
 );
 // Authentication
-router.post("/register", function (req, res, next) {
+router.post("/register", async function (req, res, next) {
+  console.log(req.body);
+  const result = await cloudinary.uploader.upload(req.body.avtar, {
+    folder: "avtars",
+  });
+
   const user = new userModel({
     username: req.body.username,
     email: req.body.email,
+    avatar: {
+      public_id: result.public_id,
+      url: result.secure_url,
+    },
     password: hashSync(req.body.password, 10),
   });
 
@@ -139,6 +153,8 @@ router.post("/login", async function (req, res) {
       id: user._id,
       username: user.username,
       email: user.email,
+      avtar: user.avatar,
+      role: user.role,
     },
   });
 });

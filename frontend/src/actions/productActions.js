@@ -23,6 +23,9 @@ import {
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_RESET,
   CLEAR_ERRORS,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
+  UPDATE_PRODUCT_FAIL,
 } from "../constants/productConstants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,8 +34,13 @@ export const getProducts = (name) => (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
+    let link = `http://localhost:8000/product/filteredProduct`;
+    if (name) {
+      link = `http://localhost:8000/product/filteredProduct?category=${name}`;
+    }
+
     axios
-      .get(`http://localhost:8000/product/filteredProduct`, {
+      .get(link, {
         headers: {
           Authorization: token,
         },
@@ -78,8 +86,6 @@ export const getAdminProducts = () => (dispatch) => {
     dispatch({ type: ADMIN_PRODUCT_FAIL, payload: error });
   }
 };
-
-
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
@@ -219,6 +225,36 @@ export const createProduct = (productData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: NEW_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updateProduct = (id, productData) => async (dispatch) => {
+  console.log(id);
+  try {
+    dispatch({ type: UPDATE_PRODUCT_REQUEST });
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `http://localhost:8000/product/admin/${id}`,
+      productData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PRODUCT_FAIL,
       payload: error.response.data.message,
     });
   }

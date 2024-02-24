@@ -36,11 +36,11 @@ const userSchema = new mongoose.Schema({
     // validate:[validator.isEmail,"Please enter a valid email"]
  },
 
-//  avatar:{
-//     public_id: { type: String, required: true },
-//     url: { type: String, required: true }
+ avatar:{
+    public_id: { type: String, required: true },
+    url: { type: String, required: true }
   
-//  },
+ },
  role:{
     type:String,
     default:"user"

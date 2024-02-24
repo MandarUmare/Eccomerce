@@ -8,6 +8,15 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
   ORDER_DETAILS_FAIL,
+  ALL_ORDERS_REQUEST,
+  ALL_ORDERS_SUCCESS,
+  ALL_ORDERS_FAIL,
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_FAIL,
+  DELETE_ORDER_REQUEST,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_FAIL,
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
 import axios from "axios";
@@ -78,6 +87,78 @@ export const getOrderDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getAllOrders = () => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  try {
+    dispatch({ type: ALL_ORDERS_REQUEST });
+
+    const { data } = await axios.get(
+      "http://localhost:8000/order/admin/getAllOrders",
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    console.log(data);
+
+    dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.order });
+  } catch (error) {
+    dispatch({
+      type: ALL_ORDERS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updateOrder = (id, order) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  try {
+    dispatch({ type: UPDATE_ORDER_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    
+         
+        
+      
+    };
+    const { data } = await axios.put(`http://localhost:8000/order/admin/updateStatus/${id}`, order, config);
+
+    dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Delete Order
+export const deleteOrder = (id) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  try {
+    dispatch({ type: DELETE_ORDER_REQUEST });
+
+    const { data } = await axios.delete(`http://localhost:8000/order/admin/delete/${id}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: DELETE_ORDER_FAIL,
       payload: error.response.data.message,
     });
   }

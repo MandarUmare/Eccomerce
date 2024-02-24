@@ -52,7 +52,7 @@ router.get("/myOrders", passport.authenticate("jwt",{session:false}),async funct
     })
 })
 
-router.get("/getSingleOrder/:id", passport.authenticate("jwt",{session:false}),async function(req,res)
+router.get("/getSingleOrder/:id", passport.authenticate("jwt",{session:false}),async function(req,res,next)
 {
 
     const order=await orderModel.findOne({_id:req.params.id}).populate("user","name email");

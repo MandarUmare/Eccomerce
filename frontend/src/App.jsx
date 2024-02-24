@@ -27,6 +27,11 @@ import Profile from "./components/Profile/Profile.jsx";
 import ProtectedRoute from "./components/Protected/ProtectedRoute.jsx";
 import Header from "./components/Login/header/Header.jsx";
 import { useSelector } from "react-redux";
+import UpdateProduct from "./components/admin/UpdateProduct.jsx";
+import OrderList from "./components/admin/OrderList.jsx";
+import ProcessOrder from "./components/admin/ProcessOrder.jsx";
+import UsersList from "./components/admin/UserList.jsx";
+import UpdateUser from "./components/admin/UpdateUser.jsx";
 
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -199,7 +204,49 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/admin/product/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateProduct></UpdateProduct>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <ProtectedRoute>
+                <OrderList></OrderList>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/order/:id"
+            element={
+              <ProtectedRoute>
+                <ProcessOrder></ProcessOrder>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute>
+                <UsersList></UsersList>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/user/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateUser></UpdateUser>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
+
         <ToastContainer
           position="bottom-center"
           autoClose={2000}

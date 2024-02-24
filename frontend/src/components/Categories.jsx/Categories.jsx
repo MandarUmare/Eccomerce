@@ -6,18 +6,33 @@ import { SiFsecure } from "react-icons/si";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Loding from "../LOading/Loding";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
   const { product, loading } = useSelector((state) => state.products);
-  const category = [];
-  product.forEach((item) => {
+  const categoriesData = [
     {
-      if (!category.includes(item.category)) {
-        category.push(item.category);
-      }
-    }
-  });
-
+      name: "Attire",
+      image: "../../../public/pexels-juan-mendez-1536619.jpg",
+    },
+    {
+      name: "Footwear",
+      image: "../../../public/pexels-melvin-buezo-2529148 (1).jpg",
+    },
+    {
+      name: "SmartPhones",
+      image: "../../../public/-original-imagtc4g22rcatjg.webp",
+    },
+    {
+      name: "SmartWatches",
+      image:
+        "../../../public/33-52-sw300-android-ios-syska-yes-original-imageubkesquqz8p.webp",
+    },
+    {
+      name: "Tops",
+      image: "../../../public/61BBlDNERFL._SL1100_.jpg",
+    },
+  ];
   return (
     <>
       <div className="bg-white min-h-20 flex justify-between flex-wrap   items-center rounded-lg my-8 mx-8">
@@ -64,19 +79,24 @@ const Categories = () => {
       ) : (
         <>
           <h1 className="text-5xl p-8 font-bold">Categories</h1>
-          <div className="bg-white  grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5  min-h-20  justify-between flex-wrap   items-center rounded-lg my-8 mx-8">
-            {category.map((category, index) => (
-              <div className="flex px-4 py-4  flex-wrap justify-between">
-                <h1 key={product._id} className="px-2 py-2 w-24 font-semibold">
-                  {category}
-                </h1>
-                <span className="h-32 w-36  overflow-hidden">
-                  <img
-                    className="rounded-lg"
-                    src={product[0].images[0].url}
-                  ></img>
-                </span>
-              </div>
+          <div className="bg-white   grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5  min-h-20  justify-between flex-wrap   items-center rounded-lg my-8 mx-8">
+            {categoriesData.map((category, index) => (
+              <Link to={`/category/${category.name}`}>
+                <div className="flex px-4 py-4 min-h-42    flex-wrap justify-between">
+                  <h1
+                    key={category}
+                    className="px-2 py-2 w-24 font-semibold text-xl"
+                  >
+                    {category.name}
+                  </h1>
+                  <span className="h-32 w-36 pb-4 flex object-cover ">
+                    <img
+                      className="rounded-lg w-32 mb-4 pb-4 h-36"
+                      src={category.image}
+                    ></img>
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </>

@@ -36,7 +36,7 @@ const Header = () => {
   const { wishlist } = useSelector((state) => state.wishlistedProducts);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { order } = useSelector((state) => state.newOrder);
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   const category = [];
   const inputref = useRef(null);
   const navigate = useNavigate();
@@ -110,23 +110,23 @@ const Header = () => {
   }
   function logoutUser() {
     dispatch(logout());
-    
+
     navigate("/");
     toast("Logout Successfully");
   }
 
   return (
     <div className=" container sticky top-0 z-50  mx-auto">
-      <div className="flex flex-wrap bg-zinc-100 justify-between items-center min-h-20">
-        <div className="mx-16">
+      <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
+        <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
             <img className="w-20 h-16" src="/images.png"></img>
           </span>
         </div>
 
-        <div className="relative  flex items-center w-[50%]">
+        <div className="relative w-screen  flex items-center sm:w-[50%]">
           <input
-            className="w-[90%] rounded-lg  border-blue-400 border-2 h-8 pl-2 pr-8"
+            className="sm:w-[90%] rounded-lg w-screen  border-blue-400 border-2 h-8 pl-2 pr-8"
             placeholder="Search products..."
             onChange={() => setSearchterm(inputref.current.value)}
             ref={inputref}
@@ -139,7 +139,7 @@ const Header = () => {
         </div>
 
         <div className="mr-16 ">
-          <button className="pr-2 rounded-lg relative flex w-40 h-12 bg-black text-zinc-200 items-center justify-center ">
+          <button className="pr-2 hidden sm:flex  rounded-lg relative  w-40 h-12 bg-black text-zinc-200 items-center justify-center ">
             Become Seller
             <FaAngleRight
               className="absolute align-middle right-2"
@@ -207,39 +207,47 @@ const Header = () => {
               ) : null}
             </div>
           </Link>
-          <div className="relative flex items-center bottom-3   object-cover">
-            {user ? (
-              <Box
-                width={2}
-                sx={{ "& .MuiFab-primary": { width: 35, height: 0 } }}
-              >
-                <SpeedDial
-                  ariaLabel="SpeedDial tooltip example"
-                  style={{ zIndex: "11" }}
-                  direction="down"
-                  className="speedDial w-2 h-2"
-                  icon={
+          <div className="relative flex items-center     object-cover">
+            
+            <Box
+              className="relative bottom-4"
+              width={2}
+              sx={{
+                "& .MuiFab-primary": {
+                  width: 35,
+                  height: 0,
+                  backgroundColor: "rgb(79 70 229 / 1)",
+                },
+              }}
+            >
+              <SpeedDial
+                ariaLabel="SpeedDial tooltip example"
+                style={{ zIndex: "11" }}
+                direction="down"
+                className="speedDial w-2 h-2"
+                icon={
+                  user.avtar.url ? (
                     <img
                       className="speedDialIcon rounded-full w-8 h-8 "
                       src={user.avtar.url ? user.avtar.url : "/Profile.png"}
                       alt="Profile"
                     />
-                  }
-                >
-                  {options.map((item) => (
-                    <SpeedDialAction
-                      key={item.name}
-                      icon={item.icon}
-                      tooltipTitle={item.name}
-                      onClick={item.func}
-                      tooltipOpen={window.innerWidth <= 600 ? true : false}
-                    />
-                  ))}
-                </SpeedDial>
-              </Box>
-            ) : (
-              <CgProfile></CgProfile>
-            )}
+                  ) : (
+                    <CgProfile size={25}></CgProfile>
+                  )
+                }
+              >
+                {options.map((item) => (
+                  <SpeedDialAction
+                    key={item.name}
+                    icon={item.icon}
+                    tooltipTitle={item.name}
+                    onClick={item.func}
+                    tooltipOpen={window.innerWidth <= 600 ? true : false}
+                  />
+                ))}
+              </SpeedDial>
+            </Box>
           </div>
         </div>
       </div>

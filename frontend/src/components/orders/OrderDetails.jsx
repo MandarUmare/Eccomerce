@@ -26,9 +26,12 @@ const OrderDetails = () => {
       ) : (
         <Fragment>
           <MetaData title="Order Details" />
-          <div className="orderDetailsPage">
+          <div className="orderDetailsPage mt-6 mx-6">
             <div className="orderDetailsContainer">
-              <h1 className="text-4xl mx-8 text-orange-500" component="h1">
+              <h1
+                className="text-4xl mx-8 font-bold text-orange-500"
+                component="h1"
+              >
                 Order #{order && order._id}
               </h1>
               <h1 className="text-3xl font-semibold mx-8 mt-6 mb-2">
