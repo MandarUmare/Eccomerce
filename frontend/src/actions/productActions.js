@@ -34,13 +34,8 @@ export const getProducts = (name) => (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
-    let link = `http://localhost:8000/product/filteredProduct`;
-    if (name) {
-      link = `http://localhost:8000/product/filteredProduct?category=${name}`;
-    }
-
     axios
-      .get(link, {
+      .get(`http://localhost:8000/product/filteredProduct?category=${name}`, {
         headers: {
           Authorization: token,
         },
