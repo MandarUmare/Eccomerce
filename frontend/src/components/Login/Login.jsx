@@ -4,7 +4,7 @@ import styles from "../../../styles/styles.js";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../../actions/userActions.js";
 
 // import { toast } from "react-toastify";
@@ -20,25 +20,13 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({});
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:8000/users/protected", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        // dispatch(saveUser(response.data));
-       
-        Navigate("/home");
-        toast.success("Logged IN Successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (isAuthenticated) {
+      Navigate("/home");
+    }
+  }, [isAuthenticated]);
 
   const submit = (data) => {
     axios

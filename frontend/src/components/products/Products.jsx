@@ -43,14 +43,14 @@ const Products = () => {
     },
   ];
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //     dispatch(clearErrors());
-  //   }
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
 
-  //   dispatch(getProducts(price, category));
-  // }, [dispatch, price, category, toast, error]);
+    dispatch(getProducts(price, category));
+  }, [dispatch, price, category, toast, error]);
   return (
     <>
       <div className="flex mx-4 mt-4">
@@ -67,17 +67,14 @@ const Products = () => {
 
           <h1 className="text-lg font-bold mt-2 ">Categories</h1>
           <ul className="categoryBox mt-2">
-            <Link to={"/products"}>All</Link>
             {categoriesData.map((category) => (
-              <Link to={`/category/${category.name}`}>
-                <li
-                  className="category-link my-1"
-                  key={category.name}
-                  onClick={() => setCategory(category.name)}
-                >
-                  {category.name}
-                </li>
-              </Link>
+              <li
+                className="category-link my-1 cursor-pointer active:text-blue-500"
+                key={category.name}
+                onClick={() => setCategory(category.name)}
+              >
+                {category.name}
+              </li>
             ))}
           </ul>
 
@@ -95,7 +92,7 @@ const Products = () => {
             />
           </fieldset>
         </div>
-        <div className="mt-10 grid grid-cols-1 xs:grid-cols-1 mb-12 sm:grid-cols-3 lg:grid-cols-4  gap-y-8 gap-x-6  px-9 justify-between min-h-[50vh]">
+        <div className="mt-10 grid grid-cols-1 xs:grid-cols-1 mb-12 sm:grid-cols-3 lg:grid-cols-4 w-full gap-y-8 gap-x-6  px-9 justify-between min-h-[50vh]">
           {product.map((product, index) => (
             <ProductCard
               key={product._id}

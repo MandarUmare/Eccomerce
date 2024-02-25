@@ -15,27 +15,14 @@ import { logout } from "../../../actions/userActions";
 import { useSelector } from "react-redux";
 const Homepage = () => {
   const Navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
+  const { user,isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:8000/users/protected", {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        Navigate("/");
-      });
+    if(!isAuthenticated){
+      Navigate("/");
+    }
   }, []);
 
-  const logout = async () => {
-    localStorage.removeItem("token");
-    Navigate("/");
-  };
+  
 
   return (
     <>

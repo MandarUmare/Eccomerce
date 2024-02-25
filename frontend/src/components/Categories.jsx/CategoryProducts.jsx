@@ -11,7 +11,7 @@ const CategoryProducts = () => {
   const { wishlist } = useSelector((state) => state.wishlistedProducts);
 
   const [price, setPrice] = useState([0, 25000]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(name);
 
   const [ratings, setRatings] = useState(0);
   const priceHandler = (event, newPrice) => {
@@ -41,7 +41,7 @@ const CategoryProducts = () => {
     },
   ];
   useEffect(() => {
-    dispatch(getProducts(name));
+    dispatch(getProducts(price,name));
   }, [name]);
 
   return (
