@@ -8,8 +8,8 @@
 @layer utilities {
 
   .header__shrink {
-    position: sticky;
-    top: -80px;
+    position: fixed;
+    top: 0px;
     left: 0;
     z-index: 9999999999;
     box-shadow: 5px 5px 15px -5px #fde4e4;

@@ -125,20 +125,18 @@ const Header = () => {
       document.body.scrollTop > 80 ||
       document.documentElement.scrollTop > 80
     ) {
-      console.log("balle balle");
       headerRef.current.classList.add("header__shrink");
     } else {
       headerRef.current.classList.remove("header__shrink");
     }
   };
-
   useEffect(() => {
-    window.addEventListener("scroll",handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll",handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  
   return (
     <div className=" container top-0 z-50    w-[100%]">
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
