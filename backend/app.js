@@ -23,7 +23,7 @@ app.set("view engine", "ejs");
 app.use(cors());
 app.use(passport.initialize());
 mongoose
-  .connect("mongodb://localhost:27017")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connection Sucessful!");
   })
@@ -55,6 +55,11 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+});
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development

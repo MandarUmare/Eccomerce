@@ -6,6 +6,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../../actions/userActions.js";
+import { getProducts } from "../../actions/productActions.js";
 
 // import { toast } from "react-toastify";
 

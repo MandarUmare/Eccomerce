@@ -136,9 +136,9 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   return (
-    <div className=" container top-0 z-50    w-[100%]">
+    <div className=" container top-0 z-50 w-[100%]">
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
@@ -205,36 +205,36 @@ const Header = () => {
         >
           <div className="menu min-[862px]:text-slate-100 text-zinc-700  justify-between w-[100%] items-center flex">
             <Link to={"/home"}>
-              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold sm:active:text-orange-500">
                 Home
               </div>
             </Link>
             {!wish ? (
-              <Link>
-                <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+              <Link to={"/wishlist"}>
+                <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold min-[862px]:active:text-orange-500">
                   WishList
                 </div>
               </Link>
             ) : (
               <Link>
-                <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+                <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold min-[862px]:active:text-orange-500">
                   Best Selling
                 </div>
               </Link>
             )}
 
             <Link to={"/products"}>
-              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold min-[862px]:active:text-orange-500">
                 Products
               </div>
             </Link>
             <Link>
-              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold min-[862px]:active:text-orange-500">
                 Events
               </div>
             </Link>
             <Link>
-              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold min-[862px]:active:text-orange-500">
                 FAQ
               </div>
             </Link>

@@ -10,9 +10,9 @@ const validator=require("validator");
 //     console.log("Something went wrong");
 //   });
 
-mongoose.connect("mongodb+srv://mandarumare2003:Mandar123@cluster0.oavp6ko.mongodb.net/multivendoreccomerce?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("Connection Sucessful!");
+    console.log("Connection Sucessfulllll!");
   })
   .catch(() => {
     console.log("Something went wrong");

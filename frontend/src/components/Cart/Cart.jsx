@@ -35,7 +35,7 @@ const Cart = () => {
         ))}
 
         {cartItems.length > 0 ? (
-          <div className="flex  flex-row justify-between mb-10 right-0 absolute mx-10  px-8 text-white  text-xl sm:mt-4 mt-8 font-bold bg-blue-500 py-1 rounded-lg w-[80%] sm:min-w-[35%] ">
+          <div className="flex  flex-row justify-between mb-10 right-0 absolute mx-10  px-8 text-white  text-xl sm:mt-4 mt-8 font-bold bg-blue-500 py-1 rounded-lg w-[80%] sm:w-32 sm:min-w-[35%] ">
             <span>Total</span>
             <span> ₹{total}</span>
             <Link to="/Shipping">

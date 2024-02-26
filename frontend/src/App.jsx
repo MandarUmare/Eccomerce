@@ -32,6 +32,7 @@ import OrderList from "./components/admin/OrderList.jsx";
 import ProcessOrder from "./components/admin/ProcessOrder.jsx";
 import UsersList from "./components/admin/UserList.jsx";
 import UpdateUser from "./components/admin/UpdateUser.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -246,7 +247,7 @@ const App = () => {
             }
           />
         </Routes>
-
+        {isAuthenticated ? <Footer></Footer> : null}
         <ToastContainer
           position="bottom-center"
           autoClose={2000}
