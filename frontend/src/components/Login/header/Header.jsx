@@ -16,7 +16,7 @@ import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { searchProduct } from "../../../actions/productActions";
 import { toast } from "react-toastify";
-// import * as React from 'react';
+import { RxHamburgerMenu } from "react-icons/rx";
 import Box from "@mui/material/Box";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
@@ -32,15 +32,20 @@ import { logout } from "../../../actions/userActions";
 const Header = () => {
   const [dropDown, setDropDown] = useState(false);
   const [searchterm, setSearchterm] = useState("");
+  const [wish, setWishlist] = useState(false);
   const { product, error } = useSelector((state) => state.products);
   const { wishlist } = useSelector((state) => state.wishlistedProducts);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { order } = useSelector((state) => state.newOrder);
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const category = [];
+  const menuRef = useRef(null);
+  const headerRef = useRef(null);
+  const dispatch = useDispatch();
+  const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
+
   const inputref = useRef(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const category = [];
 
   const search = () => {
     navigate(`/search/${searchterm}`);
@@ -114,9 +119,28 @@ const Header = () => {
     navigate("/");
     toast("Logout Successfully");
   }
+  console.log(wish);
+  const handleScroll = () => {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      console.log("balle balle");
+      headerRef.current.classList.add("header__shrink");
+    } else {
+      headerRef.current.classList.remove("header__shrink");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll",handleScroll);
+    return () => {
+      window.removeEventListener("scroll",handleScroll);
+    };
+  }, []);
 
   return (
-    <div className=" container sticky top-0 z-50  mx-auto">
+    <div className=" container top-0 z-50    w-[100%]">
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
@@ -126,7 +150,7 @@ const Header = () => {
 
         <div className="relative w-screen  flex items-center sm:w-[50%]">
           <input
-            className="sm:w-[90%] rounded-lg w-screen  border-blue-400 border-2 h-8 pl-2 pr-8"
+            className="sm:w-[100%] lg:w-[90%] w-screen rounded-lg   border-blue-400 border-2 h-8 pl-2 pr-8"
             placeholder="Search products..."
             onChange={() => setSearchterm(inputref.current.value)}
             ref={inputref}
@@ -139,7 +163,7 @@ const Header = () => {
         </div>
 
         <div className="mr-16 ">
-          <button className="pr-2 hidden sm:flex  rounded-lg relative  w-40 h-12 bg-black text-zinc-200 items-center justify-center ">
+          <button className="pr-2 hidden lg:flex  rounded-lg relative  w-40 h-12 bg-black text-zinc-200 items-center justify-center ">
             Become Seller
             <FaAngleRight
               className="absolute align-middle right-2"
@@ -148,18 +172,23 @@ const Header = () => {
           </button>
         </div>
       </div>
-      <div className="bg-indigo-600 flex flex-wrap justify-between items-center h-14">
+      <div
+        ref={headerRef}
+        className="bg-indigo-600  flex sm:mx-auto flex-wrap justify-between w-[100%] items-center h-14"
+      >
         <div
           onMouseEnter={() => setDropDown(true)}
           onMouseLeave={() => setDropDown(false)}
-          className=" h-full mx-16"
+          className=" h-full sm:ml-16  mr-12 ml-2"
         >
           <button
             onClick={() => setDropDown(!dropDown)}
-            className="flex  h-full mt-2 justify-between items-center px-2 bg-slate-100 rounded-lg  "
+            className="flex w-16 pr-20 sm:w-full sm:flex  h-full mt-2 sm:justify-between items-center sm:px-2 bg-slate-100 rounded-lg  "
           >
             <BiMenuAltLeft className="pr-2" size={25}></BiMenuAltLeft>
-            <span className="right-2 pr-6">All Categories</span>
+            <span className="sm:right-2 right:0 sm:pr-6 sm:text-lg text-sm">
+              All Categories
+            </span>
             <FaAngleDown></FaAngleDown>
           </button>
           {dropDown ? (
@@ -169,26 +198,53 @@ const Header = () => {
             ></Dropdown>
           ) : null}
         </div>
-        <div className="flex text-slate-100 justify-between w-[35%] items-center">
-          <Link to={"/home"}>
-            <div>Home</div>
-          </Link>
-          <Link>
-            <div>Best Selling</div>
-          </Link>
-          <Link to={"/products"}>
-            <div>Products</div>
-          </Link>
-          <Link>
-            <div>Events</div>
-          </Link>
-          <Link>
-            <div>FAQ</div>
-          </Link>
+        <div
+          className="flex navigation  w-[35%]  "
+          ref={menuRef}
+          onClick={() => {
+            toggleMenu();
+          }}
+        >
+          <div className="menu min-[862px]:text-slate-100 text-zinc-700  justify-between w-[100%] items-center flex">
+            <Link to={"/home"}>
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+                Home
+              </div>
+            </Link>
+            {!wish ? (
+              <Link>
+                <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+                  WishList
+                </div>
+              </Link>
+            ) : (
+              <Link>
+                <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+                  Best Selling
+                </div>
+              </Link>
+            )}
+
+            <Link to={"/products"}>
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+                Products
+              </div>
+            </Link>
+            <Link>
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+                Events
+              </div>
+            </Link>
+            <Link>
+              <div className="sm:text-lg text-xl min-[862px]:mt-0 mt-6 min-[862px]:font-normal font-bold active:text-orange-500">
+                FAQ
+              </div>
+            </Link>
+          </div>
         </div>
-        <div className="flex justify-between w-32 mr-16 items-center">
+        <div className="flex  justify-between w-32 mr-16 items-center">
           <Link to={"/wishlist"}>
-            <div className="relative">
+            <div className="relative ">
               <FaRegHeart color="white" size={25}></FaRegHeart>
               {wishlist.length > 0 ? (
                 <span className="absolute bg-green-600 rounded-full font-mono text-[10px] px-1 text-slate-100 top-[-2px] right-[-4px]">
@@ -198,7 +254,7 @@ const Header = () => {
             </div>
           </Link>
           <Link to={"/cart"}>
-            <div className="relative cursor-pointer">
+            <div className="relative cursor-pointer ml-6">
               <PiShoppingCartBold color="white" size={25}></PiShoppingCartBold>
               {cartItems.length > 0 ? (
                 <span className="absolute bg-green-600 rounded-full font-mono text-[10px] px-1 text-slate-100 top-[-2px] right-[-4px]">
@@ -207,9 +263,9 @@ const Header = () => {
               ) : null}
             </div>
           </Link>
-          <div className="relative flex items-center     object-cover">
-            
+          <div className="relative flex  items-center ml-6  object-cover">
             <Box
+              zIndex={10}
               className="relative bottom-4"
               width={2}
               sx={{
@@ -249,6 +305,13 @@ const Header = () => {
               </SpeedDial>
             </Box>
           </div>
+          <span className="mobile__menu" onClick={toggleMenu}>
+            <RxHamburgerMenu
+              color="white"
+              size={25}
+              className="min-[862px]:hidden ml-4 left-4 relative  "
+            ></RxHamburgerMenu>
+          </span>
         </div>
       </div>
     </div>

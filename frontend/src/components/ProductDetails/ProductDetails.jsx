@@ -100,66 +100,65 @@ const ProductDetails = () => {
 
   return (
     <>
-    
       {loading ? (
         <Loding></Loding>
       ) : (
         <>
-          <div className=" h-screen m-auto relative flex flex-wrap justify-center  bg-slate-100 items-center ">
-            <div className="w-[30%] h-[80%]  object-fill flex bg-white p-4">
-              <Carousel className="w-[100%] h-[100%]  ">
-                {product.images.map((image) => (
-                  <img src={image.url}></img>
-                 
-      ))}
-              </Carousel>
-            </div>
-            <div className="w-[30%] h-[80%] px-8 bg-white flex flex-col p-4 ">
-              <h1 className="text-4xl font-extrabold">{product.name}</h1>
-              <p className="text-sm font-bold text-gray-400">company name</p>
-              <div className="flex items-center">
+          <div className=" h-screen m-auto relative flex    justify-center rounded-lg  bg-slate-100 items-center ">
+            <div className="flex sm:flex-row sm:w-[60%] mt-18  w-[80%] h-[80%] flex-col">
+              <div className="  object-fill flex w-[100%] h-[100%] bg-white p-4">
+                <Carousel className="w-[100%] h-[100%]  ">
+                  {product.images.map((image) => (
+                    <img src={image.url}></img>
+                  ))}
+                </Carousel>
+              </div>
+              <div className="w-[100%] h-[100%] px-8 bg-white flex flex-col p-4 ">
+                <h1 className="text-4xl font-extrabold">{product.name}</h1>
+                <p className="text-sm font-bold text-gray-400">company name</p>
+                <div className="flex items-center">
+                  <div>
+                    <ReactStars {...options}></ReactStars>
+                  </div>
+                  <div className="text-xs mx-2 text-gray-400">
+                    ({product.reviews.length} reviews)
+                  </div>
+                </div>
+                <div className="text-2xl font-bold">₹{product.price}</div>
                 <div>
-                  <ReactStars {...options}></ReactStars>
-                </div>
-                <div className="text-xs mx-2 text-gray-400">
-                  ({product.reviews.length} reviews)
-                </div>
-              </div>
-              <div className="text-2xl font-bold">₹{product.price}</div>
-              <div>
-                <button
-                  onClick={decreaseQuantity}
-                  className="bg-zinc-400 my-6 w-4 text-white"
-                >
-                  -
-                </button>
-                <input className="w-7 text-center " value={quantity}></input>
-                <button
-                  onClick={increaseQuantity}
-                  className="bg-zinc-400 w-4 text-white"
-                >
-                  +
-                </button>
-                <button
-                  onClick={addcartHandler}
-                  className="px-4 bg-orange-500 rounded-[36px] mx-4 py-1 text-sm text-white
+                  <button
+                    onClick={decreaseQuantity}
+                    className="bg-zinc-400 my-6 w-4 text-white"
+                  >
+                    -
+                  </button>
+                  <input className="w-7 text-center " value={quantity}></input>
+                  <button
+                    onClick={increaseQuantity}
+                    className="bg-zinc-400 w-4 text-white"
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={addcartHandler}
+                    className="px-4 bg-orange-500 rounded-[36px] mx-4 py-1 text-sm text-white
           "
-                >
-                  Add to cart
-                </button>
-              </div>
-              <div>{product.description}</div>
-              <div>
-                <button
-                  onClick={submitReviewToggle}
-                  className="px-4 bg-orange-500 rounded-[36px] my-4 py-1 text-sm text-white"
-                >
-                  Submit Review
-                </button>
+                  >
+                    Add to cart
+                  </button>
+                </div>
+                <div>{product.description}</div>
+                <div>
+                  <button
+                    onClick={submitReviewToggle}
+                    className="px-4 bg-orange-500 rounded-[36px] my-4 py-1 text-sm text-white"
+                  >
+                    Submit Review
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-
           <Dialog
             aria-labelledby="simple-dialog-title"
             open={open}

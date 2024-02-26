@@ -53,19 +53,27 @@ const UsersList = () => {
   }, [dispatch, toast, error, deleteError, Navigate, isDeleted, message]);
 
   const columns = [
-    { field: "id", headerName: "User ID", minWidth: 250, flex: 0.8 },
+    {
+      field: "id",
+      headerName: "User ID",
+      minWidth: 250,
+      flex: 0.8,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
+    },
 
     {
       field: "email",
       headerName: "Email",
       minWidth: 200,
       flex: 1,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
     },
     {
       field: "name",
       headerName: "Name",
       minWidth: 200,
       flex: 0.5,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
     },
 
     {
@@ -74,6 +82,8 @@ const UsersList = () => {
       type: "number",
       minWidth: 150,
       flex: 0.3,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
+
       cellClassName: (params) => {
         const role = params.value; // Retrieve the value of the 'status' field
         return role === "admin" ? "text-green-500" : "text-red-500";
@@ -87,6 +97,8 @@ const UsersList = () => {
       minWidth: 150,
       type: "number",
       sortable: false,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
+
       renderCell: (params) => {
         const { id } = params.row;
         return (
@@ -126,9 +138,9 @@ const UsersList = () => {
     <Fragment>
       <MetaData title={`ALL USERS - Admin`} />
 
-      <div className="dashboard flex min-h-screen">
+      <div className="dashboard flex sm:flex-row flex-col  min-h-screen w-full">
         <SideBar />
-        <div className="productListContainer  ">
+        <div className="productListContainer mt-12 sm:mx-4 mx-4 sm:w-[75%] w-full sm:mt-8">
           <h1
             id="productListHeading"
             className="text-center mb-8 font-bold text-4xl"
@@ -141,7 +153,7 @@ const UsersList = () => {
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
-            className="productListTable w-full"
+            className="productListTable bg-white sm:bg-zinc-100 px-2 w-full"
             autoHeight
           />
         </div>

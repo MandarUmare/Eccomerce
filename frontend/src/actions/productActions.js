@@ -30,14 +30,19 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const getProducts = (price=[0,25000],category) => (dispatch) => {
+export const getProducts = (price=[0,25000],category,ratings='0') => (dispatch) => {
   let Lprice=price[1];
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
-    let link = `http://localhost:8000/product/filteredProduct?price=${Lprice}`;
+     
+
+   
+     let link = `http://localhost:8000/product/filteredProduct?price=${Lprice}&ratings=${ratings}`;
+    
+  
     if (category) {
-      link = `http://localhost:8000/product/filteredProduct?price=${Lprice}&category=${category}`;
+      link = `http://localhost:8000/product/filteredProduct?price=${Lprice}&category=${category}&ratings=${ratings}`;
     }
     axios
       .get(link, {

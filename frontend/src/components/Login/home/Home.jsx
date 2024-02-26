@@ -12,17 +12,17 @@ import BestDeals from "../../BestDeals/BestDeals";
 import Metadata from "../../Metadata";
 import { ToastContainer, toast } from "react-toastify";
 import { logout } from "../../../actions/userActions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 const Homepage = () => {
   const Navigate = useNavigate();
-  const { user,isAuthenticated } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
-    if(!isAuthenticated){
+    if (!isAuthenticated) {
       Navigate("/");
     }
   }, []);
-
-  
 
   return (
     <>

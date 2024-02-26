@@ -89,12 +89,12 @@ const NewProduct = ({ history }) => {
   return (
     <Fragment>
       <MetaData title="Create Product" />
-      <div className="dashboard flex ">
+      <div className="flex bg-none sm:flex-row flex-col mx-4 mt-4">
         <SideBar />
-        <div className="newProductContainer w-full  p-4 mx-6  rounded-lg  flex justify-center flex-col h-screen items-center">
+        <div className="newProductContainer w-full  sm:p-4 sm:mx-6  rounded-lg  flex justify-center flex-col h-screen items-center">
           <h1 className="text-3xl font-bold mb-4">Create Product</h1>
           <form
-            className="createProductForm bg-white rounded-lg  min-h-[60%] flex justify-center items-center flex-col"
+            className="createProductForm bg-white rounded-lg   min-h-[60%] flex justify-center items-center flex-col"
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >

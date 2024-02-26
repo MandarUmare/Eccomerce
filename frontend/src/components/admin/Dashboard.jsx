@@ -37,7 +37,7 @@ const Dashboard = () => {
   }, [dispatch]);
 
   let totalAmount = 0;
-  
+
   orders &&
     orders.forEach((item) => {
       totalAmount += item.totalPrice;
@@ -66,12 +66,19 @@ const Dashboard = () => {
     ],
   };
 
+  const onFilter = () => {
+    if (display === "hidden") {
+      setDisplay("block");
+    } else {
+      setDisplay("hidden");
+    }
+  };
   return (
-    <div className="dashboard flex  ">
+    <div className="dashboard flex sm:flex-row flex-col  min-h-screen w-full">
       <MetaData title="Dashboard - Admin Panel" />
       <Sidebar />
 
-      <div className="dashboardContainer p-4 mx-6  my-4 flex justify-center flex-col">
+      <div className="dashboardContainer w-full p-4 sm:mx-6  my-4 flex justify-center flex-col">
         {/* <Typography component="h1">Dashboard</Typography> */}
         <div className="flex justify-center">
           <p className="text-center text-2xl p-4 bg-violet-100 w-full font-semibold">
@@ -79,23 +86,23 @@ const Dashboard = () => {
           </p>
         </div>
         <div className="dashboardSummary flex justify-center ">
-          <div className="dashboardSummaryBox2 flex justify-between my-6">
+          <div className="dashboardSummaryBox2 flex sm:flex-row flex-col justify-between my-6">
             <Link
-              className="w-32 h-32  bg-red-300 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
+              className="w-32 h-32  bg-red-300 sm:mt-0 mt-8 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
               to="/admin/products"
             >
               <p>Products</p>
               <p className="">{product && product.length}</p>
             </Link>
             <Link
-              className="w-32 h-32  bg-orange-300 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
+              className="w-32 h-32 sm:mt-0 mt-8  bg-orange-300 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
               to="/admin/orders"
             >
               <p>Orders</p>
               <p>{orders && orders.length}</p>
             </Link>
             <Link
-              className="w-32 h-32 bg-zinc-500 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
+              className="w-32 h-32 sm:mt-0 mt-8 bg-zinc-500 rounded-full text-center items-center flex flex-col justify-center mx-8 text-white text-2xl"
               to="/admin/users"
             >
               <p>Users</p>
@@ -112,7 +119,6 @@ const Dashboard = () => {
                 data: [2, 5.5, 2, 8.5, 1.5, 5],
               },
             ]}
-            width={900}
             height={500}
             hoverBackgroundColor={"#B3BFF1"}
           />

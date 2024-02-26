@@ -53,9 +53,9 @@ const ProcessOrder = () => {
   return (
     <Fragment>
       <MetaData title="Process Order" />
-      <div className="dashboard flex ">
+      <div className="dashboard flex sm:flex-row flex-col  min-h-screen w-full">
         <SideBar />
-        <div className="newProductContainer  w-screen  p-4 mx-6  rounded-lg  flex justify-center flex-col min-h-screen items-center">
+        <div className="newProductContainer  w-screen  p-4 sm:mx-6  rounded-lg  flex justify-center flex-col min-h-screen items-center">
           {loading ? (
             <Loader />
           ) : (

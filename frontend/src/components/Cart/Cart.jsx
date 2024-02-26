@@ -8,9 +8,9 @@ import { toast, ToastContainer } from "react-toastify";
 
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cartItems);
-  
+
   const dispatch = useDispatch();
-  
+
   let total = 0;
   cartItems.map((item, index) => {
     console.log(typeof item.price);
@@ -22,14 +22,12 @@ const Cart = () => {
 
   return (
     <>
-      
-
       <div className="mb-32 p-6 py-12">
         {cartItems.length > 0 ? (
           <div className="bg-orange-500 flex  justify-between px-8 py-2 text-white font-semibold">
-            <div>Product</div>
-            <div className="relative left-56 ml-4">Quantity</div>
-            <div>Subtotal</div>
+            <div>Products</div>
+            <div className="sm:block hidden ml-[40%]">Quantity</div>
+            <div className="sm:block hidden">Subtotal</div>
           </div>
         ) : null}
         {cartItems.map((item, index) => (
@@ -37,11 +35,11 @@ const Cart = () => {
         ))}
 
         {cartItems.length > 0 ? (
-          <div className="flex  flex-row justify-between mb-10 right-0 absolute mx-10 px-8 text-white  text-xl font-bold bg-blue-500 py-1 rounded-sm w-[35%] ">
+          <div className="flex  flex-row justify-between mb-10 right-0 absolute mx-10  px-8 text-white  text-xl sm:mt-4 mt-8 font-bold bg-blue-500 py-1 rounded-lg w-[80%] sm:min-w-[35%] ">
             <span>Total</span>
             <span> ₹{total}</span>
             <Link to="/Shipping">
-              <button className="bg-orange-500 font-medium px-2 my-8 py-1  rounded-[36px] w-[75%] absolute right-0 top-8">
+              <button className="bg-orange-500 font-medium px-2 my-8 py-1  rounded-[36px] sm:w-[75%] w-[100%] absolute right-0 top-8">
                 Checkout
               </button>
             </Link>

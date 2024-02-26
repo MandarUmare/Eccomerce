@@ -5,6 +5,7 @@ const productModel = require("../model/product");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 const { authorizeRole } = require("../middleware/authorizeRole");
 const passport = require("passport");
+const orderModel = require("../model/orderModel");
 const cloudinary = require("cloudinary").v2;
 require("../middleware/passport");
 
@@ -12,7 +13,7 @@ router.get(
   "/filteredProduct",
   passport.authenticate("jwt", { session: false }),
   catchAsyncErrors(async function (req, res, next) {
-    const { category, price, sortBy, page, perPage } = req.query;
+    const { category, price, sortBy, page, perPage, ratings } = req.query;
     const filter = {};
 
     if (category) {
@@ -24,6 +25,10 @@ router.get(
     }
 
     const sortOptions = {};
+
+    if (ratings) {
+      filter.ratings = { $gte: parseFloat(ratings) };
+    }
 
     //Add sorting options if provided
     if (sortBy) {
@@ -59,6 +64,7 @@ router.get(
     }
   })
 );
+
 
 router.get(
   "/adminProduct",

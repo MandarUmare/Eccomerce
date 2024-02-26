@@ -114,15 +114,17 @@ const UpdateProduct = () => {
   return (
     <Fragment>
       <MetaData title="Create Product" />
-      <div className="dashboard flex ">
+      <div className="dashboard flex sm:flex-row flex-col  min-h-screen w-full">
         <SideBar />
-        <div className="newProductContainer w-full  p-4 mx-6  rounded-lg  flex justify-center flex-col h-screen items-center">
+        <div className="newProductContainer w-full  p-4 mx-6  mt-16 mb-16 rounded-lg  flex justify-center flex-col h-screen items-center">
           <form
-            className="createProductForm bg-white rounded-lg  min-h-[60%] flex justify-center items-center flex-col"
+            className="createProductForm bg-white sm:w-80  rounded-lg  min-h-[60%] flex justify-center items-center flex-col"
             encType="multipart/form-data"
             onSubmit={updateProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1 className="text-center mb-8 font-bold text-4xl">
+              Create Product
+            </h1>
 
             <div className="my-4 w-[100%] px-4">
               {/* <SpellcheckIcon /> */}

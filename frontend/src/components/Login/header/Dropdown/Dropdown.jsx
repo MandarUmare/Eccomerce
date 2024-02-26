@@ -11,7 +11,7 @@ const Dropdown = () => {
     "Tops",
   ];
   return (
-    <div className=" bg-white shadow-xl shadow-slate-600 relative z-10">
+    <div className=" bg-white  shadow-xl shadow-slate-600 relative z-10">
       <ul>
         {categoriesData.map((item, index) => (
           <Link to={`/category/${item}`}>

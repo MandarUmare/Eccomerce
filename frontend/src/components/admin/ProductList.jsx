@@ -53,7 +53,7 @@ const ProductList = () => {
     }
 
     dispatch(getAdminProducts());
-  }, [dispatch, alert, error, history,isDeleted]);
+  }, [dispatch, alert, error, history, isDeleted]);
 
   const columns = [
     {
@@ -136,9 +136,9 @@ const ProductList = () => {
     <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
-      <div className="dashboard flex min-h-screen">
+      <div className="dashboard flex sm:flex-row flex-col  min-h-screen w-full">
         <SideBar />
-        <div className="productListContainer mx-4 ">
+        <div className="productListContainer mt-12 sm:mx-4 mx-4 sm:w-[75%] w-full sm:mt-8  ">
           <h1
             id="productListHeading"
             className="text-center mb-8 font-bold text-4xl"
@@ -151,7 +151,7 @@ const ProductList = () => {
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
-            className="productListTable w-[100%] "
+            className="productListTable bg-white sm:bg-zinc-100 sm:mx-0  w-[95%] sm:w-full"
             autoHeight
           />
           {/* </Box> */}

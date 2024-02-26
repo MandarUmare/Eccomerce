@@ -49,13 +49,16 @@ const OrderList = () => {
   }, [dispatch, toast, error, deleteError, Navigate, isDeleted]);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 0.5 },
+    { field: "id", headerName: "Order ID", minWidth: 300, flex: 0,
+    headerClassName: "statusHeader text-lg text-white bg-orange-500",
+  },
 
     {
       field: "status",
       headerName: "Status",
       minWidth: 150,
       flex: 0.2,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
       cellClassName: (params) => {
         const status = params.value; // Retrieve the value of the 'status' field
         return status === "Delivered" ? "text-green-500" : "text-red-500";
@@ -67,6 +70,7 @@ const OrderList = () => {
       type: "number",
       minWidth: 100,
       flex: 0.2,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
     },
 
     {
@@ -75,6 +79,8 @@ const OrderList = () => {
       type: "number",
       minWidth: 150,
       flex: 0.5,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
+
     },
 
     {
@@ -84,6 +90,8 @@ const OrderList = () => {
       minWidth: 150,
       type: "number",
       sortable: false,
+      headerClassName: "statusHeader text-lg text-white bg-orange-500",
+
       renderCell: (params) => {
         const { id } = params.row; // Assuming 'id' is the name of the property that contains the product ID
         return (
@@ -123,9 +131,9 @@ const OrderList = () => {
     <Fragment>
       <MetaData title={`ALL ORDERS - Admin`} />
 
-      <div className="dashboard flex  min-h-screen w-full">
+      <div className="dashboard flex sm:flex-row flex-col  min-h-screen w-full">
         <SideBar />
-        <div className="productListContainer mt-7 mx-4 w-[75%] ">
+        <div className="productListContainer mt-12 sm:mx-4 mx-4 sm:w-[75%] w-full sm:mt-8  ">
           <h1
             id="productListHeading"
             className="text-center mb-8 font-bold text-4xl"
@@ -138,7 +146,7 @@ const OrderList = () => {
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
-            className="productListTable"
+            className="productListTable bg-white sm:bg-zinc-100 mx-4"
             autoHeight
           />
         </div>

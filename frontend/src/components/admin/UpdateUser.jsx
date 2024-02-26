@@ -72,9 +72,9 @@ const UpdateUser = () => {
   return (
     <Fragment>
       <MetaData title="Update User" />
-      <div className="dashboard flex ">
+      <div className="dashboard flex sm:flex-row flex-col  h-screen w-full">
         <SideBar />
-        <div className="newProductContainer w-full  px-4 mx-6  rounded-lg  flex mt-10 flex-col h-screen items-center">
+        <div className="newProductContainer w-full  sm:p-4 sm:mx-6  rounded-lg  flex sm:mt-8 mt-16 flex-col h-screen items-center">
           {loading ? (
             <Loader />
           ) : (

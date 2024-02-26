@@ -7,6 +7,9 @@ import { Pagination } from "@mui/material";
 import { getProducts } from "../../actions/productActions";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { clearErrors } from "../../actions/productActions";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { FiFilter } from "react-icons/fi";
 
 const Products = () => {
   const { product, error } = useSelector((state) => state.products);
@@ -14,10 +17,14 @@ const Products = () => {
   const dispatch = useDispatch();
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState("");
-
+  const [display, setDisplay] = useState("hidden");
   const [ratings, setRatings] = useState(0);
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
+  };
+
+  const ratingsHandler = (event, newRatings) => {
+    setRatings(newRatings);
   };
   const categoriesData = [
     {
@@ -49,12 +56,31 @@ const Products = () => {
       dispatch(clearErrors());
     }
 
-    dispatch(getProducts(price, category));
-  }, [dispatch, price, category, toast, error]);
+    dispatch(getProducts(price, category, ratings));
+  }, [dispatch, price, category, ratings, toast, error]);
+  
+  const onFilter = () => {
+    if (display === "hidden") {
+      setDisplay("block");
+    } else {
+      setDisplay("hidden");
+    }
+  };
+
   return (
     <>
-      <div className="flex mx-4 mt-4">
-        <div className="filterBox mx-4 w-[15%]">
+      <div className="flex bg-none sm:flex-row flex-col mx-4 mt-4">
+        <span
+          onClick={() => {
+            onFilter();
+          }}
+          className="bg-zinc-500 sm:hidden  w-10 ml-6 mt-4 rounded-full h-10 flex items-center justify-center"
+        >
+          <FiFilter className="" color="white" size={25} />
+        </span>
+        <div
+          className={`filterBox mx-4 p-4 sm:p-0 sm:bg-zinc-100 sm:rounded-none sm:block  rounded-2xl mt-4 ${display}  bg-indigo-50 sm:w-[15%]`}
+        >
           <h1 className="text-lg font-bold mt-2 ">Price</h1>
           <Slider
             value={price}
@@ -82,9 +108,7 @@ const Products = () => {
             <h1 className="text-lg font-bold  mt-2">Ratings Above</h1>
             <Slider
               value={ratings}
-              onChange={(e, newRating) => {
-                setRatings(newRating);
-              }}
+              onChange={ratingsHandler}
               aria-labelledby="continuous-slider"
               valueLabelDisplay="auto"
               min={0}
