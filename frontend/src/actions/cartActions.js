@@ -1,7 +1,7 @@
 
-import { REMOVE_FROM_CART } from "../constants/cartConstants.JS";
-import { SAVE_SHIPPING_INFO } from "../constants/cartConstants.JS";
-import { ADD_TO_CART } from "../constants/cartConstants.JS";
+import { REMOVE_FROM_CART } from "../constants/cartConstants";
+import { SAVE_SHIPPING_INFO } from "../constants/cartConstants";
+import { ADD_TO_CART } from "../constants/cartConstants";
 import axios from "axios";
 
 export const addtocart = (id, quantity) => async (dispatch) => {
