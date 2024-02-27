@@ -21,6 +21,7 @@ const mongoose = require("mongoose");
 const corsOptions = {
   origin:"https://eccomercefrontend-291i.onrender.com"
 };
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(cors(corsOptions));
