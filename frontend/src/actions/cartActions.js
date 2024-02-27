@@ -7,7 +7,7 @@ import axios from "axios";
 export const addtocart = (id, quantity) => async (dispatch) => {
   const token = localStorage.getItem("token");
   axios
-    .get(`http://localhost:8000/product/getSingleproduct/${id}`, {
+    .get(`https://multivendor-eccomerce.onrender.com/product/getSingleproduct/${id}`, {
       headers: {
         Authorization: token,
       },

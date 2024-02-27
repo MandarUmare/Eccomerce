@@ -34,7 +34,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     console.log(order);
 
     const { data } = await axios.post(
-      "http://localhost:8000/order/neworder",
+      "https://multivendor-eccomerce.onrender.com/order/neworder",
       order,
       config
     );
@@ -55,7 +55,7 @@ export const myOrders = () => async (dispatch, getState) => {
     dispatch({ type: MY_ORDERS_REQUEST });
     const token = localStorage.getItem("token");
 
-    const { data } = await axios.get("http://localhost:8000/order/myOrders", {
+    const { data } = await axios.get("https://multivendor-eccomerce.onrender.com/order/myOrders", {
       headers: {
         Authorization: token,
       },
@@ -75,7 +75,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
     dispatch({ type: ORDER_DETAILS_REQUEST });
     const token = localStorage.getItem("token");
     const { data } = await axios.get(
-      `http://localhost:8000/order/getSingleOrder/${id}`,
+      `https://multivendor-eccomerce.onrender.com/order/getSingleOrder/${id}`,
       {
         headers: {
           Authorization: token,
@@ -98,7 +98,7 @@ export const getAllOrders = () => async (dispatch) => {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
     const { data } = await axios.get(
-      "http://localhost:8000/order/admin/getAllOrders",
+      "https://multivendor-eccomerce.onrender.com/order/admin/getAllOrders",
       {
         headers: {
           Authorization: token,
@@ -131,7 +131,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
         
       
     };
-    const { data } = await axios.put(`http://localhost:8000/order/admin/updateStatus/${id}`, order, config);
+    const { data } = await axios.put(`https://multivendor-eccomerce.onrender.com/order/admin/updateStatus/${id}`, order, config);
 
     dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
   } catch (error) {
@@ -148,7 +148,7 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
 
-    const { data } = await axios.delete(`http://localhost:8000/order/admin/delete/${id}`,
+    const { data } = await axios.delete(`https://multivendor-eccomerce.onrender.com/order/admin/delete/${id}`,
     {
       headers: {
         Authorization: token,

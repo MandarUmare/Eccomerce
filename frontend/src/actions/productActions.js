@@ -38,11 +38,11 @@ export const getProducts = (price=[0,25000],category,ratings='0') => (dispatch) 
      
 
    
-     let link = `http://localhost:8000/product/filteredProduct?price=${Lprice}&ratings=${ratings}`;
+     let link = `https://multivendor-eccomerce.onrender.com/product/filteredProduct?price=${Lprice}&ratings=${ratings}`;
     
   
     if (category) {
-      link = `http://localhost:8000/product/filteredProduct?price=${Lprice}&category=${category}&ratings=${ratings}`;
+      link = `https://multivendor-eccomerce.onrender.com/product/filteredProduct?price=${Lprice}&category=${category}&ratings=${ratings}`;
     }
     axios
       .get(link, {
@@ -70,7 +70,7 @@ export const getAdminProducts = () => (dispatch) => {
     dispatch({ type: ALL_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8000/product/adminProduct", {
+      .get("https://multivendor-eccomerce.onrender.com/product/adminProduct", {
         headers: {
           Authorization: token,
         },
@@ -97,7 +97,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
     const token = localStorage.getItem("token");
     await axios
-      .get(`http://localhost:8000/product/getSingleproduct/${id}`, {
+      .get(`https://multivendor-eccomerce.onrender.com/product/getSingleproduct/${id}`, {
         headers: {
           Authorization: token,
         },
@@ -124,7 +124,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
     await axios
-      .delete(`http://localhost:8000/product/admin/${id}`, {
+      .delete(`https://multivendor-eccomerce.onrender.com/product/admin/${id}`, {
         headers: {
           Authorization: token,
         },
@@ -154,7 +154,7 @@ export const searchProduct = (keyword) => (dispatch) => {
     dispatch({ type: SEARCH_PRODUCT_REQUEST });
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:8000/product/find/${keyword}`, {
+      .get(`https://multivendor-eccomerce.onrender.com/product/find/${keyword}`, {
         headers: {
           Authorization: token,
         },
@@ -189,7 +189,7 @@ export const newReview = (reviewData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/product/addReview`,
+      `https://multivendor-eccomerce.onrender.com/product/addReview`,
       reviewData,
       config
     );
@@ -218,7 +218,7 @@ export const createProduct = (productData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:8000/product/admin/createproduct`,
+      `https://multivendor-eccomerce.onrender.com/product/admin/createproduct`,
       productData,
       config
     );
@@ -248,7 +248,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/product/admin/${id}`,
+      `https://multivendor-eccomerce.onrender.com/product/admin/${id}`,
       productData,
       config
     );

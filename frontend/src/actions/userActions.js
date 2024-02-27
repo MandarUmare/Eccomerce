@@ -44,7 +44,7 @@ export const getAllUsers = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_USERS_REQUEST });
     const { data } = await axios.get(
-      `http://localhost:8000/users/admin/getAllUsers`,
+      `https://multivendor-eccomerce.onrender.com/users/admin/getAllUsers`,
       {
         headers: {
           Authorization: token,
@@ -64,7 +64,7 @@ export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `http://localhost:8000/users/admin/getuser/${id}`,
+      `https://multivendor-eccomerce.onrender.com/users/admin/getuser/${id}`,
       {
         headers: {
           Authorization: token,
@@ -93,7 +93,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/users/admin/updateUserRole/${id}`,
+      `https://multivendor-eccomerce.onrender.com/users/admin/updateUserRole/${id}`,
       userData,
       config
     );
@@ -121,7 +121,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8000/users/admin/updateUserRole/${id}`,
+      `https://multivendor-eccomerce.onrender.com/users/admin/updateUserRole/${id}`,
       userData,
       config
     );
@@ -142,7 +142,7 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch({ type: DELETE_USER_REQUEST });
 
     const { data } = await axios.delete(
-      `http://localhost:8000/users/admin/deleteUser/${id}`,
+      `https://multivendor-eccomerce.onrender.com/users/admin/deleteUser/${id}`,
       {
         headers: {
           Authorization: token,
