@@ -10,7 +10,7 @@
     "build-client":"cd frontend && npm run build",
     "start-client":"cd frontend && npm run start"
   },
-  "keywords": [],
+  "keywords":[],
   "author": "",
   "license": "ISC"
 }
