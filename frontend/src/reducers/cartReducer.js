@@ -2,7 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   SAVE_SHIPPING_INFO,
-} from "../constants/cartConstants.JS";
+} from "../constants/cartConstants.js";
 
 export const cartReducer = (state = { cartItems: [] ,shippingInfo:{}}, action) => {
   switch (action.type) {
