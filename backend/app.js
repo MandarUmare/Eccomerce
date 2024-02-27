@@ -19,7 +19,7 @@ const mongoose = require("mongoose");
 
 // view engine setup
 const corsOptions = {
-  origin:"https://multivendor-eccomerce.onrender.com"
+  origin:"https://eccomercefrontend-291i.onrender.com"
 };
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
