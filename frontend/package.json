@@ -60,5 +60,5 @@
     "vite": "^5.0.8",
     "vite-plugin-proxy": "^0.5.0"
   },
-  "proxy": "http://localhost:8000/"
+  "proxy": "https://multivendor-eccomerce.onrender.com"
 }

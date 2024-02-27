@@ -31,7 +31,7 @@ const Login = () => {
 
   const submit = (data) => {
     axios
-      .post("http://localhost:8000/users/login", data)
+      .post("https://multivendor-eccomerce.onrender.com/users/login", data)
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("token", response.data.token);

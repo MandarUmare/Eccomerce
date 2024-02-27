@@ -41,7 +41,7 @@ const App = () => {
     const fetchStripeApiKey = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8000/payment/stripeapikey"
+          "https://multivendor-eccomerce.onrender.com/payment/stripeapikey"
         );
         setStripeApiKey(data.stripeApiKey);
       } catch (error) {

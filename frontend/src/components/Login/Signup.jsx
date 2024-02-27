@@ -35,7 +35,7 @@ const Singup = () => {
 
   const submit=(data)=>{
     data.avtar=avatar;
-              axios.post("http://localhost:8000/users/register",data).then((response)=>{
+              axios.post("https://multivendor-eccomerce.onrender.com/users/register",data).then((response)=>{
                 console.log(response.data);
                 localStorage.setItem("token",response.data.token);
                 dispatch(saveUser(response.data.user));
