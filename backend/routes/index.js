@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 
-router.get("/",()=>{
-    res.json({message:"server fetched"});
-})
+router.get("/", (req, res) => {
+  res.send({ message: "server fetched" });
+});
 module.exports = router;

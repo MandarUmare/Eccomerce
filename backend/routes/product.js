@@ -183,6 +183,7 @@ router.put(
 
 router.get(
   "/getSingleproduct/:id",
+  
   catchAsyncErrors(async function (req, res, next) {
     const product = await productModel.findOne({ _id: req.params.id });
 
