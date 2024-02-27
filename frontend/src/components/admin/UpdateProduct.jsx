@@ -32,7 +32,7 @@ const UpdateProduct = () => {
   const [Stock, setStock] = useState();
   const [images, setImages] = useState([]);
   const [oldImages, setOldImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([product.images]);
+  const [imagesPreview, setImagesPreview] = useState([...product.images]);
 
   const categories = [
     "Laptop",
@@ -45,7 +45,7 @@ const UpdateProduct = () => {
   ];
 
   useEffect(() => {
-    if (product && product._id !== id) {
+    if (!product && product._id !== id) {
       dispatch(getProductDetails(id));
     } else {
       setName(product.name);
@@ -69,6 +69,7 @@ const UpdateProduct = () => {
       console.log(isUpdated);
       toast.success("Product Updated Successfully");
       Navigate("/admin/products");
+      dispatch(getProductDetails(id));
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [dispatch, toast, error, Navigate, isUpdated, id, product, updateError]);

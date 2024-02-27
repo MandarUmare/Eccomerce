@@ -61,12 +61,12 @@ const CategoryProducts = () => {
           onClick={() => {
             onFilter();
           }}
-          className="bg-zinc-500  w-10 ml-6 mt-4 rounded-full h-10 flex items-center justify-center"
+          className="bg-zinc-500  sm:hidden   w-10 ml-6 mt-4 rounded-full h-10 flex items-center justify-center"
         >
           <FiFilter className="" color="white" size={25} />
         </span>
         <div
-          className={`filterBox mx-4 p-4 sm:p-0 sm:bg-zinc-100 sm:rounded-none  rounded-2xl mt-4 ${display}  bg-indigo-50 sm:w-[15%]`}
+          className={`filterBox mx-4 p-4 sm:p-0 sm:bg-zinc-100 sm:rounded-none sm:block  rounded-2xl mt-4 ${display}  bg-indigo-50 sm:w-[15%]`}
         >
           <h1 className="text-lg font-bold mt-2 ">Price</h1>
           <Slider
