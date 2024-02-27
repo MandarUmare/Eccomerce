@@ -55,11 +55,7 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
-});
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
