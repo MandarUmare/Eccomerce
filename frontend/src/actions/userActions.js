@@ -36,6 +36,7 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: REMOVE_USER_INFO,
   });
+  
   localStorage.setItem("token", "");
 };
 

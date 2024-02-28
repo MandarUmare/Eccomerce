@@ -115,9 +115,9 @@ const Header = () => {
   }
   function logoutUser() {
     dispatch(logout());
-
+    toast.success("Logging out");
     navigate("/");
-    toast("Logout Successfully");
+   
   }
   console.log(wish);
   const handleScroll = () => {

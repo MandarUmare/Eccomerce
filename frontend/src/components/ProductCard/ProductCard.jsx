@@ -16,6 +16,7 @@ import { getProductDetails } from "../../actions/productActions";
 import { addtocart } from "../../actions/cartActions";
 import { FaHeart } from "react-icons/fa6";
 import { addtowishlist, removeFromWishlist } from "../../actions/wishAction";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product, isWishlisted }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const ProductCard = ({ product, isWishlisted }) => {
 
   const addToCart = (e) => {
     dispatch(addtocart(product._id,1));
+    toast.success("Added to cart");
   };
 
   const addToWishlist = (e) => {
