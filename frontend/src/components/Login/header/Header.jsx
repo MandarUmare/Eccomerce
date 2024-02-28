@@ -143,7 +143,7 @@ const Header = () => {
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
             <img
-              className="w-20 h-16"
+              className="w-32 h-16"
               src="https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"
             ></img>
           </span>
