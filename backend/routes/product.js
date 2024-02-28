@@ -59,7 +59,7 @@ router.get(
         },
       });
     } catch (error) {
-      console.error(error);
+      
       res.status(500).send("Internal Server Error");
     }
   })
@@ -85,7 +85,7 @@ router.post(
   catchAsyncErrors(async function (req, res, next) {
     let images = [];
 
-    console.log(req.body.images);
+   
     if (typeof req.body.images === "string") {
       images.push(req.body.images);
     } else {
@@ -93,7 +93,7 @@ router.post(
     }
 
     const imagesLinks = [];
-    console.log(images.length);
+   
     for (let i = 0; i < images.length; i++) {
       const result = await cloudinary.uploader.upload(images[i], {
         folder: "products",
@@ -232,8 +232,7 @@ router.put(
     console.log(review.userId);
     if (isReviewed && product.reviews) {
       product.reviews.forEach((review) => {
-        console.log("review.userId" + review.userId);
-        console.log("req.user._id" + req.user._id);
+       
         if (review.userId.toString() === req.user._id.toString()) {
           (review.rating = req.body.rating),
             (review.comments = req.body.comments);

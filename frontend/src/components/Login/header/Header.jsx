@@ -175,7 +175,7 @@ const Header = () => {
       </div>
       <div
         ref={headerRef}
-        className="bg-indigo-600  flex sm:mx-auto flex-wrap justify-between w-screen items-center h-14"
+        className="bg-indigo-600  flex sm:mx-auto flex-wrap justify-between w-[100%] items-center h-14"
       >
         <div
           onMouseEnter={() => setDropDown(true)}

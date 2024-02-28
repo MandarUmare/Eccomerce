@@ -15,7 +15,7 @@ const Footer = () => {
           <Col lg="3" md="4" sm="6" className="p-4  ">
             <div className="footer__logo text-start">
               <img
-                className="w-24 h-16"
+                className="h-16 w-48"
                 src={"https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"}
                 alt="logo"
               />

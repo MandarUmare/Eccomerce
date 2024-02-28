@@ -33,7 +33,7 @@ router.get(
     const userDetails = await userModel.findOne({
       username: req.user.username,
     });
-    console.log(req.user.role);
+    
     res.send(userDetails);
   }
 );
