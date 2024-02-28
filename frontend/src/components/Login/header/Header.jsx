@@ -139,10 +139,13 @@ const Header = () => {
 
   return (
     <div className=" container top-0 z-50 w-screen">
-      <div className="flex flex-wrap bg-zinc-100 w-full sm:justify-between justify-center items-center min-h-20">
+      <div className="flex flex-wrap bg-zinc-100  sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
-            <img className="w-20 h-16" src="https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"></img>
+            <img
+              className="w-20 h-16"
+              src="https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"
+            ></img>
           </span>
         </div>
 
