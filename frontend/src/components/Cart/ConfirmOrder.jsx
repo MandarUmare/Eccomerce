@@ -41,7 +41,7 @@ const ConfirmOrder = ({ history }) => {
     <Fragment>
       <MetaData title="Confirm Order" />
       <CheckoutSteps activeStep={1} />
-      <div className="confirmOrderPage p-14 flex sm:flex-row flex-wrap ">
+      <div className="confirmOrderPage justify-center flex sm:flex-row flex-wrap ">
         <div className="w-[60%]">
           <div className="confirmshippingArea ">
             <h1 className="text-2xl  font-bold">Shipping Info</h1>
