@@ -69,7 +69,7 @@ const Header = () => {
     {
       icon: (
         <FaListAlt
-          style={{ color: order.length > 0 ? "tomato" : "unset" }}
+          style={{ color: order?.length > 0 ? "tomato" : "unset" }}
         ></FaListAlt>
       ),
       name: "Orders",
@@ -79,10 +79,10 @@ const Header = () => {
     {
       icon: (
         <FaShoppingCart
-          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+          style={{ color: cartItems?.length > 0 ? "tomato" : "unset" }}
         />
       ),
-      name: `Cart(${cartItems.length})`,
+      name: `Cart(${cartItems?.length})`,
       func: cart,
     },
     {
