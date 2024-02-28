@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Loginpage from "./pages/Loginpage.jsx";
 import Signuppage from "./pages/Signuppage.jsx";
@@ -37,6 +37,15 @@ import Footer from "./components/Footer/Footer.jsx";
 const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
   const { user, isAuthenticated } = useSelector((state) => state.user);
+
+  const Wrapper = ({children}) => {
+    const location = useLocation();
+    useLayoutEffect(() => {
+      document.documentElement.scrollTo(0, 0);
+    }, [location.pathname]);
+    return children
+  } 
+
   useEffect(() => {
     const fetchStripeApiKey = async () => {
       try {
@@ -55,6 +64,7 @@ const App = () => {
   return (
     <>
       <Router>
+      <Wrapper>
         {isAuthenticated ? <Header></Header> : null}
         <Routes>
           <Route path="/" element={<Loginpage />} />
@@ -260,6 +270,7 @@ const App = () => {
           pauseOnHover
           theme="colored"
         />
+        </Wrapper>
       </Router>
     </>
   );

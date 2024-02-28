@@ -158,7 +158,7 @@ const Header = () => {
           ></input>
           <IoMdSearch
             onClick={search}
-            className="absolute right-[11%] "
+            className="absolute sm:right-[11%] right-2 "
             size={20}
           ></IoMdSearch>
         </div>
