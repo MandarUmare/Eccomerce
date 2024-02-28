@@ -15,7 +15,7 @@ const Profile = () => {
   return (
     <Fragment>
       <MetaData title={`${user.username}'s Profile`} />
-      <div className="profileContainer flex sm:flex-row flex-col  w-[100%]">
+      <div className="profileContainer flex sm:flex-row flex-col justify-center  w-[100%]">
         <div className="flex flex-col items-center mx-10 my-10">
           <h1 className="text-5xl text-orange-500 font-bold">My Profile</h1>
           <img
