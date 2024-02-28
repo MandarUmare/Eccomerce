@@ -140,7 +140,7 @@ const Header = () => {
   return (
     <div className=" container top-0 z-50 w-[100%]">
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
-        <div className="mx-16 flex  sm:justify-start justify-center items-center">
+        <div className="mx-16 flex py-2  sm:justify-start justify-center items-center">
           <span>
             <img
               className="h-14 w-48"
