@@ -7,7 +7,6 @@ const Dropdown = () => {
     "Footwear",
     "SmartPhones",
     "SmartWatches",
-    "Shoes",
     "Tops",
   ];
   return (
