@@ -13,24 +13,27 @@ const Categories = () => {
   const categoriesData = [
     {
       name: "Attire",
-      // image: "../../../public/pexels-juan-mendez-1536619.jpg",
+      image: " https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+     
     },
     {
       name: "Footwear",
-      // image: "../../../public/pexels-melvin-buezo-2529148 (1).jpg",
+      image: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      
     },
     {
       name: "SmartPhones",
-      // image: "../../../public/-original-imagtc4g22rcatjg.webp",
+      image:
+        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/z/4/r/-original-imagtc4g22rcatjg.jpeg?q=70&crop=false",
     },
     {
       name: "SmartWatches",
-      // image:
-      //   "../../../public/33-52-sw300-android-ios-syska-yes-original-imageubkesquqz8p.webp",
+      image:
+        "https://rukminim2.flixcart.com/image/832/832/l3t2fm80/smartwatch/b/7/n/33-52-sw300-android-ios-syska-yes-original-imageubkesquqz8p.jpeg?q=70&crop=false",
     },
     {
       name: "Tops",
-      // image: "../../../public/61BBlDNERFL._SL1100_.jpg",
+      image: "https://m.media-amazon.com/images/I/61BBlDNERFL._SL1100_.jpg",
     },
   ];
   return (

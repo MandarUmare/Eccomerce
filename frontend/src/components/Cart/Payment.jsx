@@ -55,7 +55,7 @@ const Payment = () => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:8000/payment/process/payment",
+        "https://multivendor-eccomerce.onrender.com/payment/process/payment",
         paymentdata,
         config
       );

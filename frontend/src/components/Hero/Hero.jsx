@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <>
     
-    <div className='flex  justify-end items-center min-h-[80vh] bg-cover w-[100%] relative z-[-1]  ' style={{backgroundImage: "url('../../../public/new2.jpg')"}}>
+    <div className='flex  justify-end items-center min-h-[80vh] bg-cover w-[100%] relative z-[-1]  ' style={{backgroundImage: "url('https://img.freepik.com/premium-photo/room-with-white-wall-plant-with-pot-with-plant-it_445983-17104.jpg')"}}>
     <div className='m-20 sm:w-full top-[10%] left-[7%]'>
         <h1 className='text-[3rem] font-bold w-[50%] '>
             Best Collection For Home Decoration

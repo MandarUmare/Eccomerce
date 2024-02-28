@@ -142,7 +142,7 @@ const Header = () => {
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
-            {/* <img className="w-20 h-16" src="/images.png"></img> */}
+            <img className="w-20 h-16" src="https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"></img>
           </span>
         </div>
 
@@ -244,9 +244,9 @@ const Header = () => {
           <Link to={"/wishlist"}>
             <div className="relative ">
               <FaRegHeart color="white" size={25}></FaRegHeart>
-              {wishlist.length > 0 ? (
+              {wishlist?.length > 0 ? (
                 <span className="absolute bg-green-600 rounded-full font-mono text-[10px] px-1 text-slate-100 top-[-2px] right-[-4px]">
-                  {wishlist.length}
+                  {wishlist?.length}
                 </span>
               ) : null}
             </div>

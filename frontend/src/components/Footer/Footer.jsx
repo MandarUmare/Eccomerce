@@ -14,11 +14,11 @@ const Footer = () => {
         <Row className="grid sm:grid-cols-4 grid-cols-1">
           <Col lg="3" md="4" sm="6" className="p-4  ">
             <div className="footer__logo text-start">
-              {/* <img
+              <img
                 className="w-24 h-16"
-                src={"../../../public/images.png"}
+                src={"https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"}
                 alt="logo"
-              /> */}
+              />
               <h5 className="text-xl font-bold mb-4 mt-4">Eccomerce</h5>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
