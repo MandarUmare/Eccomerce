@@ -88,11 +88,11 @@ const ConfirmOrder = ({ history }) => {
         </div>
         <div className="border-solid border-t-[1px] sm:block hidden w-[1px] ml-14  transform-rotate-90  bg-zinc-400"></div>
         {/*  */}
-        <div className="sm:w-[30%] ml-12  flex justify-center ">
+        <div className="sm:w-[30%]  flex justify-center ">
           <div className="orderSummary w-[80%]">
             <h1 className="text-2xl font-bold">Order Summery</h1>
             <div className="border-solid  border-zinc-300 border-t-[1px] w-full mt-4"></div>
-            <div className="w-64">
+            <div className="sm:w-64">
               <div className="flex justify-between mt-6">
                 <p>Subtotal:</p>
                 <span className="">₹{subtotal}</span>
