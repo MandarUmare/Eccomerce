@@ -138,18 +138,18 @@ const Header = () => {
   }, []);
 
   return (
-    <div className=" container top-0 z-50 w-screen">
+    <div className=" container top-0 z-50 w-[100%]">
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
             <img
-              className="h-16 w-48"
+              className="h-14 w-48"
               src="https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"
             ></img>
           </span>
         </div>
 
-        <div className="relative w-screen  flex items-center sm:w-[50%]">
+        <div className="relative w-[100%]  flex items-center sm:w-[50%]">
           <input
             className="sm:w-[100%] lg:w-[90%] w-screen rounded-lg   border-blue-400 border-2 h-8 pl-2 pr-8"
             placeholder="Search products..."
