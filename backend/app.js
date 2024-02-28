@@ -19,7 +19,7 @@ const mongoose = require("mongoose");
 
 // view engine setup
 const corsOptions = {
-  origin:"https://eccomerce-v3xw.onrender.com"
+  origin: "https://eccomerce-v3xw.onrender.com",
 };
 
 app.set("views", path.join(__dirname, "views"));
@@ -42,10 +42,8 @@ cloudinary.config({
   secure: true,
 });
 app.use(logger("dev"));
-app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 // Handle GET requests to all other routes by serving the index.html
-
 
 app.use(bodyParser.json({ limit: "500mb", parameterLimit: 1000000 }));
 app.use(
@@ -68,8 +66,11 @@ app.use("/payment", paymentRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/frontend/dist/index.html'));
+
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "../frontend/dist/index.html"));
 });
 
 // error handler

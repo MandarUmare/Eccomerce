@@ -93,6 +93,7 @@ const Products = () => {
 
           <h1 className="text-lg font-bold mt-2 ">Categories</h1>
           <ul className="categoryBox mt-2">
+          <Link to={"/products"}>All</Link>
             {categoriesData.map((category) => (
               <li
                 className="category-link my-1 cursor-pointer active:text-blue-500"
