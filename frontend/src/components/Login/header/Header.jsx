@@ -138,8 +138,8 @@ const Header = () => {
   }, []);
 
   return (
-    <div className=" container top-0 z-50 w-full">
-      <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
+    <div className=" container top-0 z-50 w-screen">
+      <div className="flex flex-wrap bg-zinc-100 w-full sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
             <img className="w-20 h-16" src="https://www.logolynx.com/images/logolynx/56/56afea50b83164e3e272d4ebeccd94fb.png"></img>
@@ -148,7 +148,7 @@ const Header = () => {
 
         <div className="relative w-screen  flex items-center sm:w-[50%]">
           <input
-            className="sm:w-[100%] lg:w-[90%] w-full rounded-lg   border-blue-400 border-2 h-8 pl-2 pr-8"
+            className="sm:w-[100%] lg:w-[90%] w-screen rounded-lg   border-blue-400 border-2 h-8 pl-2 pr-8"
             placeholder="Search products..."
             onChange={() => setSearchterm(inputref.current.value)}
             ref={inputref}
@@ -172,7 +172,7 @@ const Header = () => {
       </div>
       <div
         ref={headerRef}
-        className="bg-indigo-600  flex sm:mx-auto flex-wrap justify-between w-full items-center h-14"
+        className="bg-indigo-600  flex sm:mx-auto flex-wrap justify-between w-screen items-center h-14"
       >
         <div
           onMouseEnter={() => setDropDown(true)}
