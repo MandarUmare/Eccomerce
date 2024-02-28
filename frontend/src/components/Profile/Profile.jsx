@@ -15,11 +15,11 @@ const Profile = () => {
   return (
     <Fragment>
       <MetaData title={`${user.username}'s Profile`} />
-      <div className="profileContainer flex  w-[100%]">
+      <div className="profileContainer flex sm:flex-row flex-col  w-[100%]">
         <div className="flex flex-col items-center mx-10 my-10">
           <h1 className="text-5xl text-orange-500 font-bold">My Profile</h1>
           <img
-            className="w-80 mt-8 h-80 my-2 rounded-full "
+            className="sm:w-80 w-[100%] mt-8 h-80 my-2 rounded-full "
             src={user.avtar.url}
             alt={user.name}
           />

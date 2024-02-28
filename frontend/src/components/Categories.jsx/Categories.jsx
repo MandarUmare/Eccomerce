@@ -92,12 +92,12 @@ const Categories = () => {
                   >
                     {category.name}
                   </h1>
-                  {/* <span className="h-32 w-36 pb-4 flex object-cover ">
+                  <span className="h-32 w-36 pb-4 flex object-cover ">
                     <img
                       className="rounded-lg w-32 mb-4 pb-4 h-36"
                       src={category.image}
                     ></img>
-                  </span> */}
+                  </span>
                 </div>
               </Link>
             ))}
