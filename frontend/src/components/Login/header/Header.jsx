@@ -142,7 +142,7 @@ const Header = () => {
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
-            <img className="w-20 h-16" src="/images.png"></img>
+            {/* <img className="w-20 h-16" src="/images.png"></img> */}
           </span>
         </div>
 
@@ -254,9 +254,9 @@ const Header = () => {
           <Link to={"/cart"}>
             <div className="relative cursor-pointer ml-6">
               <PiShoppingCartBold color="white" size={25}></PiShoppingCartBold>
-              {cartItems.length > 0 ? (
+              {cartItems?.length > 0 ? (
                 <span className="absolute bg-green-600 rounded-full font-mono text-[10px] px-1 text-slate-100 top-[-2px] right-[-4px]">
-                  {cartItems.length}
+                  {cartItems?.length}
                 </span>
               ) : null}
             </div>
