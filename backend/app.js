@@ -62,16 +62,18 @@ app.use("/users", usersRouter);
 app.use("/product", productRouter);
 app.use("/order", orderRouter);
 app.use("/payment", paymentRouter);
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
 
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname + "../frontend/dist/index.html"));
 });
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+
 
 // error handler
 app.use(function (err, req, res, next) {
