@@ -13,24 +13,24 @@ const Categories = () => {
   const categoriesData = [
     {
       name: "Attire",
-      image: "../../../public/pexels-juan-mendez-1536619.jpg",
+      // image: "../../../public/pexels-juan-mendez-1536619.jpg",
     },
     {
       name: "Footwear",
-      image: "../../../public/pexels-melvin-buezo-2529148 (1).jpg",
+      // image: "../../../public/pexels-melvin-buezo-2529148 (1).jpg",
     },
     {
       name: "SmartPhones",
-      image: "../../../public/-original-imagtc4g22rcatjg.webp",
+      // image: "../../../public/-original-imagtc4g22rcatjg.webp",
     },
     {
       name: "SmartWatches",
-      image:
-        "../../../public/33-52-sw300-android-ios-syska-yes-original-imageubkesquqz8p.webp",
+      // image:
+      //   "../../../public/33-52-sw300-android-ios-syska-yes-original-imageubkesquqz8p.webp",
     },
     {
       name: "Tops",
-      image: "../../../public/61BBlDNERFL._SL1100_.jpg",
+      // image: "../../../public/61BBlDNERFL._SL1100_.jpg",
     },
   ];
   return (
@@ -89,12 +89,12 @@ const Categories = () => {
                   >
                     {category.name}
                   </h1>
-                  <span className="h-32 w-36 pb-4 flex object-cover ">
+                  {/* <span className="h-32 w-36 pb-4 flex object-cover ">
                     <img
                       className="rounded-lg w-32 mb-4 pb-4 h-36"
                       src={category.image}
                     ></img>
-                  </span>
+                  </span> */}
                 </div>
               </Link>
             ))}
