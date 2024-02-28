@@ -1,5 +1,10 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
 import Loginpage from "./pages/Loginpage.jsx";
 import Signuppage from "./pages/Signuppage.jsx";
@@ -38,13 +43,13 @@ const App = () => {
   const [stripeApiKey, setStripeApiKey] = useState("");
   const { user, isAuthenticated } = useSelector((state) => state.user);
 
-  const Wrapper = ({children}) => {
+  const Wrapper = ({ children }) => {
     const location = useLocation();
     useLayoutEffect(() => {
       document.documentElement.scrollTo(0, 0);
-    }, [location.pathname]);
-    return children
-  } 
+    }, [location]);
+    return children;
+  };
 
   useEffect(() => {
     const fetchStripeApiKey = async () => {
@@ -64,212 +69,212 @@ const App = () => {
   return (
     <>
       <Router>
-      <Wrapper>
-        {isAuthenticated ? <Header></Header> : null}
-        <Routes>
-          <Route path="/" element={<Loginpage />} />
-          <Route path="/sign-up" element={<Signuppage />} />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Homepage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/product/:id"
-            element={
-              <ProtectedRoute>
-                <ProductDetails />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/products"
-            element={
-              <ProtectedRoute>
-                <Products />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/search/:keyword"
-            element={
-              <ProtectedRoute>
-                <Search />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <ProtectedRoute>
-                <Cart />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/shipping"
-            element={
-              <ProtectedRoute>
-                <Shipping />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/order/confirm"
-            element={
-              <ProtectedRoute>
-                <ConfirmOrder />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/wishlist"
-            element={
-              <ProtectedRoute>
-                <Wishlist></Wishlist>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/category/:name"
-            element={
-              <ProtectedRoute>
-                <CategoryProducts></CategoryProducts>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/process/payment"
-            element={
-              <ProtectedRoute>
-                <Elements stripe={loadStripe(stripeApiKey)}>
-                  <Payment />
-                </Elements>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/success"
-            element={
-              <ProtectedRoute>
-                <OrderSuccess></OrderSuccess>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/orders"
-            element={
-              <ProtectedRoute>
-                <MyOrder></MyOrder>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/order/:id"
-            element={
-              <ProtectedRoute>
-                <OrderDetails></OrderDetails>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="admin/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard></Dashboard>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/products"
-            element={
-              <ProtectedRoute>
-                <ProductList></ProductList>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/product"
-            element={
-              <ProtectedRoute>
-                <NewProduct></NewProduct>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/logout"
-            element={
-              <ProtectedRoute>
-                <NewProduct></NewProduct>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/account"
-            element={
-              <ProtectedRoute>
-                <Profile></Profile>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/product/:id"
-            element={
-              <ProtectedRoute>
-                <UpdateProduct></UpdateProduct>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/orders"
-            element={
-              <ProtectedRoute>
-                <OrderList></OrderList>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/order/:id"
-            element={
-              <ProtectedRoute>
-                <ProcessOrder></ProcessOrder>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/users"
-            element={
-              <ProtectedRoute>
-                <UsersList></UsersList>
-              </ProtectedRoute>
-            }
-          />
+        <Wrapper>
+          {isAuthenticated ? <Header></Header> : null}
+          <Routes>
+            <Route path="/" element={<Loginpage />} />
+            <Route path="/sign-up" element={<Signuppage />} />
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Homepage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/product/:id"
+              element={
+                <ProtectedRoute>
+                  <ProductDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/products"
+              element={
+                <ProtectedRoute>
+                  <Products />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/search/:keyword"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/shipping"
+              element={
+                <ProtectedRoute>
+                  <Shipping />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/order/confirm"
+              element={
+                <ProtectedRoute>
+                  <ConfirmOrder />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/wishlist"
+              element={
+                <ProtectedRoute>
+                  <Wishlist></Wishlist>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/category/:name"
+              element={
+                <ProtectedRoute>
+                  <CategoryProducts></CategoryProducts>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/process/payment"
+              element={
+                <ProtectedRoute>
+                  <Elements stripe={loadStripe(stripeApiKey)}>
+                    <Payment />
+                  </Elements>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/success"
+              element={
+                <ProtectedRoute>
+                  <OrderSuccess></OrderSuccess>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <ProtectedRoute>
+                  <MyOrder></MyOrder>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/order/:id"
+              element={
+                <ProtectedRoute>
+                  <OrderDetails></OrderDetails>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard></Dashboard>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/products"
+              element={
+                <ProtectedRoute>
+                  <ProductList></ProductList>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/product"
+              element={
+                <ProtectedRoute>
+                  <NewProduct></NewProduct>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/logout"
+              element={
+                <ProtectedRoute>
+                  <NewProduct></NewProduct>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/account"
+              element={
+                <ProtectedRoute>
+                  <Profile></Profile>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/product/:id"
+              element={
+                <ProtectedRoute>
+                  <UpdateProduct></UpdateProduct>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/orders"
+              element={
+                <ProtectedRoute>
+                  <OrderList></OrderList>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/order/:id"
+              element={
+                <ProtectedRoute>
+                  <ProcessOrder></ProcessOrder>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute>
+                  <UsersList></UsersList>
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/admin/user/:id"
-            element={
-              <ProtectedRoute>
-                <UpdateUser></UpdateUser>
-              </ProtectedRoute>
-            }
+            <Route
+              path="/admin/user/:id"
+              element={
+                <ProtectedRoute>
+                  <UpdateUser></UpdateUser>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          {isAuthenticated ? <Footer></Footer> : null}
+          <ToastContainer
+            position="bottom-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
           />
-        </Routes>
-        {isAuthenticated ? <Footer></Footer> : null}
-        <ToastContainer
-          position="bottom-center"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
         </Wrapper>
       </Router>
     </>

@@ -44,7 +44,7 @@ const Shipping = ({ history }) => {
     <Fragment>
       <MetaData title="Shipping Details" />
 
-      <CheckoutSteps activeStep={0} />
+      <CheckoutSteps  activeStep={0} />
 
       <div className="w-screen flex mt-12 justify-center h-screen ">
         <div className="shippingBox">

@@ -56,8 +56,8 @@ const CheckoutSteps = ({ activeStep }) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Stepper
+    <Box  sx={{ width: "100%" }}>
+      <Stepper className="mt-12"
         alternativeLabel
         activeStep={activeStep}
         style={stepStyles}
