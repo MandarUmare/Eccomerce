@@ -45,9 +45,7 @@ app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 // Handle GET requests to all other routes by serving the index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/frontend/dist/index.html'));
-});
+
 
 app.use(bodyParser.json({ limit: "500mb", parameterLimit: 1000000 }));
 app.use(
@@ -69,6 +67,9 @@ app.use("/payment", paymentRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
+});
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/frontend/dist/index.html'));
 });
 
 // error handler
