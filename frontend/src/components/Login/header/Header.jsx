@@ -138,7 +138,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className=" container top-0 z-50 w-[100%]">
+    <div className=" container top-0 z-50 w-screen">
       <div className="flex flex-wrap bg-zinc-100 sm:justify-between justify-center items-center min-h-20">
         <div className="mx-16 flex  sm:justify-start justify-center items-center">
           <span>
@@ -172,7 +172,7 @@ const Header = () => {
       </div>
       <div
         ref={headerRef}
-        className="bg-indigo-600  flex sm:mx-auto flex-wrap justify-between w-[100%] items-center h-14"
+        className="bg-indigo-600  flex sm:mx-auto flex-wrap justify-between w-screen items-center h-14"
       >
         <div
           onMouseEnter={() => setDropDown(true)}

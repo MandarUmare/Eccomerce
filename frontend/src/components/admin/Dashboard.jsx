@@ -43,28 +43,7 @@ const Dashboard = () => {
       totalAmount += item.totalPrice;
     });
 
-  const lineState = {
-    labels: ["Initial Amount", "Amount Earned"],
-    datasets: [
-      {
-        label: "TOTAL AMOUNT",
-        backgroundColor: ["tomato"],
-        hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, totalAmount],
-      },
-    ],
-  };
-  
-  const doughnutState = {
-    labels: ["Out of Stock", "InStock"],
-    datasets: [
-      {
-        backgroundColor: ["#00A6B4", "#6800B4"],
-        hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [outOfStock, product?.length - outOfStock],
-      },
-    ],
-  };
+ 
 
   const onFilter = () => {
     if (display === "hidden") {
@@ -131,7 +110,7 @@ const Dashboard = () => {
                 data: [
                   {
                     id: 0,
-                    value: product.length - outOfStock,
+                    value: product?.length - outOfStock,
                     label: "In Stock",
                   },
                   { id: 1, value: outOfStock, label: "Out of Stock" },
