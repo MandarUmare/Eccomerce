@@ -146,7 +146,7 @@ const Header = () => {
           </span>
         </div>
 
-        <div className="relative w-screen  flex items-center sm:w-[80%]">
+        <div className="relative w-screen  flex items-center sm:w-[50%]">
           <input
             className="sm:w-[100%] lg:w-[90%] w-screen rounded-lg   border-blue-400 border-2 h-8 pl-2 pr-8"
             placeholder="Search products..."
