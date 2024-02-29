@@ -12,7 +12,7 @@ import { Country, State } from "country-state-city";
 // import { useAlert } from "react-alert";
 import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
-import {  toast } from "react-toastify";
+import {  toast,ToastContainer } from "react-toastify";
 
 const Shipping = () => {
   const dispatch = useDispatch();

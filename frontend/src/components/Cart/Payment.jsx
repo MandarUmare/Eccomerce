@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import CheckoutSteps from "./CheckoutSteps";
-import { toast } from "react-toastify";
+import { toast ,ToastContainer} from "react-toastify";
 import { MdEventNote } from "react-icons/md";
 import { FaCreditCard } from "react-icons/fa6";
 import { MdVpnKey } from "react-icons/md";
