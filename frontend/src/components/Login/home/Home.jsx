@@ -21,6 +21,8 @@ const Homepage = () => {
   useEffect(() => {
     if (!isAuthenticated) {
       Navigate("/");
+    }else{
+      toast.success("Logged in successfully");
     }
   }, []);
 
