@@ -83,7 +83,8 @@ const ProductCard = ({ product, isWishlisted }) => {
             <span
               onClick={(e) => {
                 e.preventDefault();
-                addToCart();
+
+                !cartClick?addToCart():null;
                 setcartClick(!cartClick);
               }}
               className="py-2 px-0 pl-2"

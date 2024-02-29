@@ -29,11 +29,12 @@ const Shipping = () => {
 
   const shippingSubmit = (e) => {
     e.preventDefault();
-
     if (phoneNo.length < 10 || phoneNo.length > 10) {
       toast.error("Phone number should be of 10 Digits");
       return;
     }
+    
+
     dispatch(
       saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
     );
@@ -147,6 +148,18 @@ const Shipping = () => {
           </form>
         </div>
       </div>
+      <ToastContainer
+            position="bottom-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
     </Fragment>
   );
 };
