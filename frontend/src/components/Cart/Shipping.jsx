@@ -14,7 +14,7 @@ import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useNavigate } from "react-router-dom";
 import {  toast } from "react-toastify";
 
-const Shipping = ({ history }) => {
+const Shipping = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   // const alert = useAlert();
