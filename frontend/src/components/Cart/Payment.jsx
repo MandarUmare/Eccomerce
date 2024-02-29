@@ -108,7 +108,7 @@ const Payment = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, error, toast]);
+  }, [dispatch, error,result.error, toast]);
 
   return (
     <>
