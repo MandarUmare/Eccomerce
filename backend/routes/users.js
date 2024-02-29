@@ -15,7 +15,7 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   async function (req, res) {
     const users = await userModel.findOne({ username: req.user.username });
-    console.log(users + "vjvhj");
+   
     (users.username = req.body.username),
       (users.address = req.body.address),
       (users.city = req.body.city),
@@ -91,7 +91,7 @@ router.delete(
 );
 // Authentication
 router.post("/register", async function (req, res, next) {
-  console.log(req.body);
+
   const result = await cloudinary.uploader.upload(req.body.avtar, {
     folder: "avtars",
   });
@@ -131,7 +131,7 @@ router.post("/register", async function (req, res, next) {
 router.post("/login", async function (req, res) {
   const user = await userModel.findOne({ username: req.body.username });
 
-  console.log(user);
+
   if (!user) {
     return res.status(401).send({
       sucess: false,

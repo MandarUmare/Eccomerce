@@ -11,7 +11,7 @@ passport.use(
     userModel
       .findOne({ _id: jwt_payload.id })
       .then((user) => {
-        console.log(user);
+     
         if (user) {
           return done(null, user);
         } else {
