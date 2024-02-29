@@ -41,7 +41,7 @@ const ProductCard = ({ product, isWishlisted }) => {
 
   const addToCart = (e) => {
     dispatch(addtocart(product._id,1));
-    toast.success("Added to cart");
+   
   };
 
   const addToWishlist = (e) => {
