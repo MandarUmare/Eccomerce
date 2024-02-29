@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import CheckoutSteps from "./CheckoutSteps";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { MdEventNote } from "react-icons/md";
 import { FaCreditCard } from "react-icons/fa6";
 import { MdVpnKey } from "react-icons/md";
@@ -108,7 +108,7 @@ const Payment = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, error,result.error, toast]);
+  }, [dispatch, error, result.error, toast]);
 
   return (
     <>
