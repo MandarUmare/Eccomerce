@@ -22,7 +22,7 @@ const Homepage = () => {
     if (!isAuthenticated) {
       Navigate("/");
     }else{
-      toast.success("Logged in successfully");
+      toast("Logged in successfully");
     }
   }, []);
 
@@ -34,6 +34,18 @@ const Homepage = () => {
         <Categories></Categories>
         <BestDeals></BestDeals>
       </div>
+      <ToastContainer
+            position="bottom-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
     </>
   );
 };
