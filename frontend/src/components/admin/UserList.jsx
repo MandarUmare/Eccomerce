@@ -14,6 +14,7 @@ import {
 } from "../../actions/userActions.js";
 import { DELETE_USER_RESET } from "../../constants/userConstants";
 import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const UsersList = () => {
   const dispatch = useDispatch();
