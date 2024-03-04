@@ -94,6 +94,7 @@ const ProductDetails = () => {
 
     if (success) {
       dispatch({ type: NEW_REVIEW_RESET });
+       toast.success("Review Added");
     }
     dispatch(getProductDetails(id));
   }, [success, dispatch, id, loadingReview, error, toast, reviewError]);
